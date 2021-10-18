@@ -6,11 +6,14 @@ int main(int argc, const char *argv[]){
 
     const char * filename = argv[2];
 
+    cout << ndata <<  endl;
+
     Vettore data = Leggi(filename, ndata);
+    cout << endl;
+    cout << data.GetN() << endl;
+    cout << endl;
 
     Stampa(data, 10);
-
-    ~data;
 
     return 1;
 
