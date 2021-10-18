@@ -6,7 +6,8 @@ int main(int argc, const char *argv[]) {
         cout << "Uso del programma: " << argv[0] << " ndata filename" << endl;
         return -1;
     }
-    
+
+
     int ndata = atoi(argv[1]);
     
     const char* filename = argv[2];

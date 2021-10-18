@@ -17,8 +17,8 @@ class Vettore {
         void Scambia(unsigned int k, unsigned int j);
         
         double & operator[](unsigned int index);
-        Vettore & operator=(const Vettore &vett);
-        Vettore(const Vettore &&vett);
+        Vettore & operator=(Vettore &&vett);
+        Vettore(Vettore &&vett);
 
     private:
         unsigned int m_N;

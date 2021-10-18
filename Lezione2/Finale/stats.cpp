@@ -1,7 +1,7 @@
 #include "stats.h"
 #include "vettore.h"
 
-double Mean(const Vettore vett){
+double Mean(const Vettore & vett){
     double mean;
     double sum=0;
     
@@ -13,7 +13,7 @@ double Mean(const Vettore vett){
     return mean;
 }
 
-double StdDev(const Vettore data){
+double StdDev(const Vettore &data){
     double dev;
     double sum=0;
     double mean=Mean(data);
@@ -26,7 +26,7 @@ double StdDev(const Vettore data){
     return dev;
 }
 
-double Variance(const Vettore data){
+double Variance(const Vettore &data){
     return pow(StdDev(data), 2);
 }
 
@@ -60,14 +60,14 @@ Vettore Read(const char* filename, int ndata){
     cout << endl;
 } */
 
-void Print(const Vettore data, int dim){
+void Print(const Vettore &data, int dim){
     for(int i=0; i<dim; i++){
         cout << data.GetComponent(i) << endl;
     }
     cout << endl;
 }
 
-double * CopyFromVettore(const Vettore vett){
+double * CopyFromVettore(const Vettore &vett){
     double * vcopy = new double[vett.GetN()];
     for(int k=0; k<vett.GetN(); k++){
         vcopy[k] = vett.GetComponent(k);
@@ -95,7 +95,7 @@ void Sort(double * vett, int ndata){
     }
 }
 
-void Sort(Vettore vett){
+void Sort(Vettore &vett){
     int dim=vett.GetN();
     int imin=0;
     double min=0;
@@ -114,7 +114,7 @@ void Sort(Vettore vett){
     }
 }
 
-double Median(const Vettore data){
+double Median(const Vettore &data){
     double * vcopy = CopyFromVettore(data);
     Sort(vcopy, data.GetN());
     
@@ -126,7 +126,7 @@ double Median(const Vettore data){
     }
 }
 
-void Write(const char * filename, Vettore data, int dim){
+void Write(const char * filename, Vettore &data, int dim){
     ofstream file_out;
     
     file_out.open(filename);
