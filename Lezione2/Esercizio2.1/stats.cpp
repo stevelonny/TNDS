@@ -29,7 +29,7 @@ double Var(Vettore data){
     return pow(DevStd(data), 2);
 }
 
-double * Leggi(const char* filename, int ndata){
+Vettore Leggi(const char* filename, int ndata){
 
     ifstream file_in;
     Vettore data(ndata);
@@ -66,7 +66,7 @@ void Stampa(Vettore data, int dim){
 double * CopiaDaClasse(const Vettore vett){
     double * vcopy = new double[vett.GetN()];
     for(int k=0; k<vett.GetN(); k++){
-        vcopy[k] = vett[k];
+        vcopy[k] = vett.GetComponent(k);
     }
     
     return vcopy;
@@ -95,11 +95,11 @@ double Mediana(const Vettore data){
     double * vcopy = CopiaDaClasse(data);
     Ordina(vcopy, data.GetN());
     
-    if(dim%2 == 0){
-        return (vcopy[(dim/2)-1]+vcopy[(dim/2)])/2.;
+    if(data.GetN()%2 == 0){
+        return (vcopy[(data.GetN()/2)-1]+vcopy[(data.GetN()/2)])/2.;
     }
     else{
-        return vcopy[dim/2];
+        return vcopy[data.GetN()/2];
     }
 }
 

@@ -8,7 +8,7 @@ using namespace std;
 double Media(const Vettore vett);
 double Var(double data[], int dim);
 double Devstd(double data[],int dim);
-double * Leggi(const char* filename, int ndata);
+Vettore Leggi(const char* filename, int ndata);
 //void Stampa(const char * filename, double data[], int dim);
 void Stampa(double data[], int dim);
 double * CopiaDaClasse(const Vettore vett);
