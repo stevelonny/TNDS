@@ -41,7 +41,7 @@ template <typename T> vector<T> Read(const char* filename, int ndata){
 
     ifstream file_in;
     vector<T> data;
-    cerr << "(1/4) Vettore creato con dim " << data.size() << endl;
+    cerr << "(1/4) Vettore creato" << endl;
     file_in.open(filename);
     cerr << "(2/4) Apertura file " << filename << endl;
     if(file_in.fail()){
