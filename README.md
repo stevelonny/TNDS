@@ -8,3 +8,9 @@ classe vettore
 riadattare la libreria di statistica per la classe vettore
     *da fare bene con accesso diretto al vettore o cercando di usare i constructor definiti all'interno della classe*
 
+## Lezione 3
+Template e libreria vector
+Uso anche di TH1F e di root
+
+    siamo in pari sium
+
