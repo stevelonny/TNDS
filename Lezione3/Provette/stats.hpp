@@ -59,7 +59,7 @@ template <typename T> vector<T> Read(const char* filename, int ndata){
     return data;
 }
 
-/* template <typename T> void Read(const char* filename){
+template <typename T> vector<T> Read(const char* filename){
     ifstream file_in;
     vector<T> data;
     cerr << "(1/4) Vettore creato" << endl;
@@ -72,14 +72,13 @@ template <typename T> vector<T> Read(const char* filename, int ndata){
     T temp;
     int c=0;
     cerr << "(3/4) Lettura da file" << endl;
-    while(!file_in.eof()){
-        file_in >> temp;
+    while(file_in>>temp){ //file>>temp returns false if eof() - better version of spoletini cycle
         data.push_back(temp);
         c++;
     }
     cerr << "(4/4) Finito lettura di " << c << " valori" << endl;
     return data;
-} */
+}
 
 /* void Stampa(const char * filename, double data[], int dim){
     cout << "Dati letti da " << filename << ": " << endl;
@@ -97,6 +96,19 @@ template <typename T> void Print(const vector<T> &data, int nlines){
     cout << endl;
 }
 
+template <typename T> void Print(const vector<T> &data, int nlines, bool verse){
+    if(verse){
+        for(int i=0; i<nlines; i++){
+            cout << data[i] << endl;
+        }
+    }
+    else{
+        for(int i=data.size()-1; i>(data.size()-nlines-1); i--){
+            cout << data[i] << endl;
+        }
+    }
+    cout << endl;
+}
 
 template <typename T> double Median(vector<T> &data){
     
