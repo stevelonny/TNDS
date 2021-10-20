@@ -23,18 +23,28 @@ int main(int argc, char** argv){
     else{
         data = Read<double>(filename, ndata);
     }
-    
+
     cout << "Primi 5 valori:" << endl;
-    Print(data, 5, true);
+    Print(data, 5);
+    const char* ffive = "ffive.txt";
+    cout << "Scriviamo primi 5 valori su " << ffive << endl;
+    Print(data, ffive, 5);
+    
     cout << "Ultimi 5 valori:" << endl;
-    Print(data, 5, false);
-
-    cout << "Media: " << Mean<double>(data) << endl;
-    cout << "Deviazione standard: " << StdDev<double>(data) << endl;
-    cout << "Varianza: " << Variance<double>(data) << endl << endl;
-    //cout << "Mediana: " << Median<double>(data) << endl << endl;
-
-    Write("out.txt", data, ndata);
+    Print(data, -5);
+    const char* lfive = "lfive.txt";
+    cout << "Scriviamo gli ultimi 5 valori su " << lfive << endl;
+    Print(data, lfive, -5);
+    
+    cout << "Ordiniamo il vettore" << endl;
+    sort(data.begin(), data.end());
+    
+    cout << "Scriviamo tutto il vettore dall'inizio" << endl;
+    const char* fall = "fall.txt";
+    Print(data, fall);
+    cout << "Scriviamo tutto il vettore dal fondo" << endl;
+    const char* lall = "lall.txt";
+    Print(data, lall, false);
 
     return 0;
 }

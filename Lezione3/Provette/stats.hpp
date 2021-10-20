@@ -8,6 +8,8 @@
 
 using namespace std;
 
+/* Funzioni di statistica base */
+//Media
 template <typename T> double Mean(const vector<T> & vett){ //teniamo double che è meglio
     T mean;
     T sum = 0;
@@ -19,7 +21,7 @@ template <typename T> double Mean(const vector<T> & vett){ //teniamo double che 
 
     return mean;
 }
-
+//Deviazione standard
 template <typename T> double StdDev(const vector<T> &data){
     double dev;
     double sum=0;
@@ -32,13 +34,30 @@ template <typename T> double StdDev(const vector<T> &data){
 
     return dev;
 }
-
+//Deviazionie Standard della media
+template <typename T> double MeanStdDev(const vector<T> &data){
+    return (StdDev<T>(data)/((double)data.size()));
+}
+//Varianza
 template <typename T> double Variance(const vector<T> &data){
     return pow(StdDev(data), 2);
 }
+//Mediana
+template <typename T> double Median(vector<T> &data){
 
-template <typename T> vector<T> Read(const char* filename, int ndata){
+    sort(data.begin(), data.end());
 
+    if(data.size()%2 == 0){
+        return double((data[(data.size()/2)-1]+data[(data.size()/2)])/2.);
+    }
+    else{
+        return double(data[data.size()/2]);
+    }
+}
+/* Lettura da file con numero di valori o tutto */
+//Numero di valori
+template <typename T> vector<T> Read(const char* filename, unsigned int ndata){
+    assert(ndata!=0 && "Numero valori da leggere =0");
     ifstream file_in;
     vector<T> data;
     cerr << "(1/4) Vettore creato" << endl;
@@ -58,7 +77,7 @@ template <typename T> vector<T> Read(const char* filename, int ndata){
     cerr << "(4/4) Finito lettura di " << ndata << " valori" << endl;
     return data;
 }
-
+//Tutto
 template <typename T> vector<T> Read(const char* filename){
     ifstream file_in;
     vector<T> data;
@@ -79,58 +98,110 @@ template <typename T> vector<T> Read(const char* filename){
     cerr << "(4/4) Finito lettura di " << c << " valori" << endl;
     return data;
 }
-
-/* void Stampa(const char * filename, double data[], int dim){
-    cout << "Dati letti da " << filename << ": " << endl;
-
-    for(int i=0; i<dim; i++){
-        cout << data[i] << endl;
-    }
-    cout << endl;
-} */
-
-template <typename T> void Print(const vector<T> &data, int nlines){
-    for(int i=0; i<nlines; i++){
+/* Scrittura a schermo e a file dei vettori */
+//Schermo, tutto il vettore
+template <typename T> void Print(const vector<T> &data){
+    assert(data.size()!=0 && "Vettore vuoto");
+    for(int i=0; i<data.size(); i++){
         cout << data[i] << endl;
     }
     cout << endl;
 }
-
-template <typename T> void Print(const vector<T> &data, int nlines, bool verse){
-    if(verse){
+//Schermo, con numero di valori e verso
+template <typename T> void Print(const vector<T> &data, int nlines){
+    assert(nlines!=0 && "Numero di valori passato da leggere =0");
+    assert(abs(nlines)<data.size() && "Numero di valori passato da leggere > size vettore");
+    assert(data.size()!=0 && "Vettore vuoto");
+    if(nlines>0){
         for(int i=0; i<nlines; i++){
             cout << data[i] << endl;
         }
+        cout << endl;
     }
-    else{
-        for(int i=data.size()-1; i>(data.size()-nlines-1); i--){
+    else if(nlines<0){
+        for(int i=data.size()-1; i>(data.size()+nlines-1); i--){
             cout << data[i] << endl;
         }
+        cout << endl;
     }
-    cout << endl;
 }
-
-template <typename T> double Median(vector<T> &data){
-    
-    sort(data.begin(), data.end());
-
-    if(data.size()%2 == 0){
-        return double((data[(data.size()/2)-1]+data[(data.size()/2)])/2.);
+//Schermo, tutto il vettore con verso
+template <typename T> void Print(const vector<T> &data, bool verse){
+    assert(data.size()!=0 && "Vettore vuoto");
+    if(verse){
+        for(int i=0; i<data.size(); i++){
+            cout << data[i] << endl;
+        }
+        cout << endl;
     }
     else{
-        return double(data[data.size()/2]);
+        for(int i=data.size()-1; i>-1; i--){
+            cout << data[i] << endl;
+        }
+        cout << endl;
     }
 }
 
-template <typename T> void Write(const char * filename, vector<T> &data, int dim){
-    cerr << "(1/4) Apertura file " << filename << endl;
+//File, tutto il vettore
+template <typename T> void Print(const vector<T> &data, const char* filename){
+    assert(data.size()!=0 && "Vettore vuoto");
+    cerr << "(1/4) Apertura file: " << filename << endl;
     ofstream file_out;
-    cerr << "(2/4) Scrittura su file" << endl;
+    cerr << "(2/4) Scrittura su file di tutto il vettore (" << data.size() << " valori)" << endl;
     file_out.open(filename);
-    for(int i=0; i<dim; i++){
+    for(int i=0; i<data.size(); i++){
         file_out << data[i] << endl;
     }
     cerr << "(3/4) Chiusura file" << endl;
     file_out.close();
     cerr << "(4/4) Finito scrittura" << endl;
 }
+//File, tutto il vettore con verso
+template <typename T> void Print(const vector<T> &data, const char* filename, bool verse){
+    assert(data.size()!=0 && "Vettore vuoto");
+    cerr << "(1/4) Apertura file: " << filename << endl;
+    ofstream file_out;
+    cerr << "(2/4) Scrittura su file dell'intero vettore (" << data.size() << " valori)";
+    file_out.open(filename);
+    if(verse){
+        cerr << " dall'inizio del vettore" << endl;
+        for(int i=0; i<data.size(); i++){
+            file_out << data[i] << endl;
+        }
+    }
+    else{
+        cerr << " dal fondo del vettore" << endl;
+        for(int i=data.size()-1; i>-1; i--){
+            file_out << data[i] << endl;
+        }
+    }
+    cerr << "(3/4) Chiusura file" << endl;
+    file_out.close();
+    cerr << "(4/4) Finito scrittura" << endl;
+}
+//File, con numero di valori e verso
+template <typename T> void Print(const vector<T> &data, const char* filename, int nlines){
+    assert(nlines!=0 && "Numero di valori passato da leggere =0");
+    assert(abs(nlines)<data.size() && "Numero di valori passato da leggere > size vettore");
+    assert(data.size()!=0 && "Vettore vuoto");
+    cerr << "(1/4) Apertura file: " << filename << endl;
+    ofstream file_out;
+    cerr << "(2/4) Scrittura su file di " << abs(nlines) << " valori";
+    file_out.open(filename);
+    if(nlines>0){
+        cerr << " dall'inizio del vettore" << endl;
+        for(int i=0; i<nlines; i++){
+            file_out << data[i] << endl;
+        }
+    }
+    else if(nlines<0){
+        cerr << " dal fondo del vettore" << endl;
+        for(int i=data.size()-1; i>(data.size()+nlines-1); i--){
+            file_out << data[i] << endl;
+        }
+    }
+    cerr << "(3/4) Chiusura file" << endl;
+    file_out.close();
+    cerr << "(4/4) Finito scrittura" << endl;
+}
+
