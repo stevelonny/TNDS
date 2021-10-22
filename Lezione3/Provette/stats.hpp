@@ -59,8 +59,8 @@ template <typename T> double Median(vector<T> &data){
 template <typename T> vector<T> Read(const char* filename, unsigned int ndata){
     assert(ndata!=0 && "Numero valori da leggere =0");
     ifstream file_in;
-    vector<T> data;
-    cerr << "(1/4) Vettore creato" << endl;
+    vector<T> data(ndata);
+    cerr << "(1/4) Vettore creato con " << data.size() << " elementi" << endl;
     file_in.open(filename);
     cerr << "(2/4) Apertura file: " << filename << endl;
     if(file_in.fail()){
@@ -69,9 +69,8 @@ template <typename T> vector<T> Read(const char* filename, unsigned int ndata){
     }
     T temp;
     cerr << "(3/4) Lettura da file" << endl;
-    for(int i=0; i<ndata; i++){
-        file_in >> temp;
-        data.push_back(temp);
+    for(int i=0; i<data.size(); i++){
+        file_in >> data[i];
         // aggiungere controllo fine file
     }
     cerr << "(4/4) Finito lettura di " << ndata << " valori" << endl;
@@ -110,7 +109,7 @@ template <typename T> void Print(const vector<T> &data){
 //Schermo, con numero di valori e verso
 template <typename T> void Print(const vector<T> &data, int nlines){
     assert(nlines!=0 && "Numero di valori passato da leggere =0");
-    assert(abs(nlines)<data.size() && "Numero di valori passato da leggere > size vettore");
+    assert(abs(nlines)<=data.size() && "Numero di valori passato da leggere > size vettore");
     assert(data.size()!=0 && "Vettore vuoto");
     if(nlines>0){
         for(int i=0; i<nlines; i++){
@@ -119,7 +118,7 @@ template <typename T> void Print(const vector<T> &data, int nlines){
         cout << endl;
     }
     else if(nlines<0){
-        for(int i=data.size()-1; i>(data.size()+nlines-1); i--){
+        for(int i=data.size()-1; (abs(nlines)==data.size())? i>=0 : i>(data.size()+nlines-1)/*ternary or elvis operator sium*/; i--){
             cout << data[i] << endl;
         }
         cout << endl;
@@ -141,7 +140,6 @@ template <typename T> void Print(const vector<T> &data, bool verse){
         cout << endl;
     }
 }
-
 //File, tutto il vettore
 template <typename T> void Print(const vector<T> &data, const char* filename){
     assert(data.size()!=0 && "Vettore vuoto");
@@ -182,7 +180,7 @@ template <typename T> void Print(const vector<T> &data, const char* filename, bo
 //File, con numero di valori e verso
 template <typename T> void Print(const vector<T> &data, const char* filename, int nlines){
     assert(nlines!=0 && "Numero di valori passato da leggere =0");
-    assert(abs(nlines)<data.size() && "Numero di valori passato da leggere > size vettore");
+    assert(abs(nlines)<=data.size() && "Numero di valori passato da leggere > size vettore");
     assert(data.size()!=0 && "Vettore vuoto");
     cerr << "(1/4) Apertura file: " << filename << endl;
     ofstream file_out;
