@@ -39,7 +39,10 @@ double Posizione::getRho() const{
 }
 //Distanza
 double Posizione::getDistance(const Posizione &pos) const{
-    return sqrt(pow(m_x-pos.getX(), 2) + pow(m_x-pos.getY(), 2) + pow(m_z-pos.getZ(), 2));
+    return sqrt(pow(m_x-pos.getX(), 2) + pow(m_y-pos.getY(), 2) + pow(m_z-pos.getZ(), 2));
+}
+double Posizione::getDistance(const double x, const double y, const double z) const{
+    return sqrt(pow(m_x-x, 2) + pow(m_y-y, 2) + pow(m_z-z, 2));
 }
 //Distanza dall'origine
 double Posizione::getDistance() const{

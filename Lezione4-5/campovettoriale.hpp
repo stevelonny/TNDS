@@ -18,7 +18,7 @@ class CampoVettoriale : public Posizione {
     double getFy() const {return m_Fy;}
     double getFz() const {return m_Fz;}
     //Restituisce il modulo
-    double Modulo();
+    double Modulo() const;
   private:
     double m_Fx, m_Fy, m_Fz;
 };

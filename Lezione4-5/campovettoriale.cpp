@@ -28,6 +28,6 @@ CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & v){
     return (*this) = (*this)+v;
 }
 //Modulo
-double CampoVettoriale::Modulo(){
+double CampoVettoriale::Modulo() const{
     return sqrt(m_Fx*m_Fx+m_Fy*m_Fy+m_Fz*m_Fz);
 }

@@ -25,6 +25,7 @@ class Posizione {
         double getRho() const;
         //Distanza
         double getDistance(const Posizione &pos) const;
+        double getDistance(const double x, const double y, const double z) const;
         double getDistance() const;
         //Operatori & Co.
         //double & operator[](unsigned int index);

@@ -1,10 +1,17 @@
 #include "puntomateriale.hpp"
 #include <cassert>
 
+#include "TApplication.h"
+#include "TGraph.h"
+
+#define d (double)1.E-10
+
 bool are_close(double, double);
 void test_coordinates();
 void test_coulomb_law();
 void test_newton_law();
+
+TGraph DoPlot(const PuntoMateriale &e, const PuntoMateriale &p, int low, int upper);
 
 int main(int argc, char** argv){
     
@@ -24,7 +31,6 @@ int main(int argc, char** argv){
     Posizione pos(x, y, z);
     Elettrone *e = new Elettrone();
     Protone *p = new Protone();
-    const double d = 1.E-10;
     Particella el(*e);
     Particella pr(*p);
 
@@ -41,7 +47,23 @@ int main(int argc, char** argv){
     cout << "il campo G = ( " << G.getFx() << " , " << G.getFy() << " , " << G.getFz() << " )" << endl;
     cout << "di modulo |G| = " << G.Modulo() << endl;
 
+    TApplication app("app", 0, 0);
+    TGraph campo = DoPlot(ele, pro, 100, 1000);
+    campo.Draw("APC");
+
+    app.Run();
+
     return 0;
+}
+
+TGraph DoPlot(const PuntoMateriale &e, const PuntoMateriale &p, int low, int upper){
+  TGraph campo;
+  double distance;
+  for(int i=low; i<upper; i++){
+    distance = d*(double)i;
+    campo.SetPoint(i, distance, (e.CampoElettrico(distance, 0, 0)+p.CampoElettrico(distance, 0, 0)).Modulo());
+  }
+  return campo;
 }
 
 bool are_close(double calculated, double expected) {

@@ -16,6 +16,7 @@ class PuntoMateriale : public Particella, Posizione {
     ~PuntoMateriale();
     //Campi vari
     CampoVettoriale CampoElettrico(const Posizione&) const ;
+    CampoVettoriale CampoElettrico(const double x, const double y, const double z) const;
     CampoVettoriale CampoGravitazionale(const Posizione&) const;
 };
 
