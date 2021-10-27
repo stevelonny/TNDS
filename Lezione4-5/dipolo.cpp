@@ -29,11 +29,9 @@ int main(int argc, char** argv){
     double z = atof(argv[3]);
 
     Posizione pos(x, y, z);
-    Elettrone *e = new Elettrone();
-    Protone *p = new Protone();
-    Particella el(*e);
-    Particella pr(*p);
-
+    Elettrone el;
+    Protone pr;
+    
     PuntoMateriale ele(el, 0., 0., d/2);
     PuntoMateriale pro(pr, 0., 0., -d/2);
     
@@ -41,10 +39,10 @@ int main(int argc, char** argv){
     CampoVettoriale G = ele.CampoGravitazionale(pos) + pro.CampoGravitazionale(pos);
 
     cout << "Posizione ( " << pos.getX() << " , " << pos.getY() << " , " << pos.getZ() << " )";
-    cout << " Distanza dall'origine " << pos.getDistance() << endl;
-    cout << "il campo E = ( " << E.getFx() << " , " << E.getFy() << " , " << E.getFz() << " )" << endl;
+    cout << " distanza dall'origine " << pos.getDistance() << endl;
+    cout << "Campo elettrico E = ( " << E.getFx() << " , " << E.getFy() << " , " << E.getFz() << " )" << endl;
     cout << "di modulo |E| = " << E.Modulo() << endl;
-    cout << "il campo G = ( " << G.getFx() << " , " << G.getFy() << " , " << G.getFz() << " )" << endl;
+    cout << "Campo gravitazionale G = ( " << G.getFx() << " , " << G.getFy() << " , " << G.getFz() << " )" << endl;
     cout << "di modulo |G| = " << G.Modulo() << endl;
 
     TApplication app("app", 0, 0);

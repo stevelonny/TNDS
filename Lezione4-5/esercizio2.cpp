@@ -11,10 +11,10 @@ int main(int argc, char** argv){
 
     Particella *a = new Particella(m, c);
     Elettrone *e = new Elettrone();
-
+    
     a->Print();
     e->Print();
-
+    
     cout << "Proviamo a fare una particella b uguale ad a" << endl;
     Particella b(*a);
     b.Print();
