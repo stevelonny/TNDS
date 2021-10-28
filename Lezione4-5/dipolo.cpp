@@ -65,7 +65,7 @@ TGraph DoPlot(const PuntoMateriale &e, const PuntoMateriale &p, int low, int upp
 }
 
 bool are_close(double calculated, double expected) {
-  double epsilon = 1e-6;
+  double epsilon = 1e-7;
   return fabs(calculated - expected) < epsilon;
 }
 
