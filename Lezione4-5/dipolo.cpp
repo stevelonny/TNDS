@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 
     test_coordinates();
     test_coulomb_law();
-    //test_newton_law();
+    test_newton_law();
 
     double x = atof(argv[1]);
     double y = atof(argv[2]);

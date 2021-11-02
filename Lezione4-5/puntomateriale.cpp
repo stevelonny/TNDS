@@ -1,6 +1,6 @@
 #include "puntomateriale.hpp"
 #define eps0 (double)8.85418781762E-12
-#define G (double)6.67430E-11
+#define G (double)6.67E-11
 //Costruttori e distruttore
 PuntoMateriale::PuntoMateriale(double massa, double carica, const Posizione& pos)
     : Particella(massa, carica), Posizione(pos) {}
