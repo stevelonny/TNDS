@@ -32,11 +32,9 @@ int main(int argc, char** argv){
     double z = atof(argv[3]);
 
     Posizione pos(x, y, z);
-    Elettrone el;
-    Protone pr;
     
-    PuntoMateriale ele(el, 0., 0., d/2);
-    PuntoMateriale pro(pr, 0., 0., -d/2);
+    PuntoMateriale ele(Elettrone(), 0., 0., d/2);
+    PuntoMateriale pro(Protone(), 0., 0., -d/2);
     
     CampoVettoriale E = ele.CampoElettrico(pos) + pro.CampoElettrico(pos);
     CampoVettoriale G = ele.CampoGravitazionale(pos) + pro.CampoGravitazionale(pos);

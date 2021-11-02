@@ -1,5 +1,7 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
+help :
+	echo "clean"
 dipolo : dipolo.o posizione.o particella.o puntomateriale.o campovettoriale.o
 	g++ dipolo.o puntomateriale.o campovettoriale.o particella.o posizione.o ${LIBS} ${INCS} -o dipolo.x
 esercizio2 : esercizio2.o particella.o
@@ -23,7 +25,7 @@ campovettoriale.o : campovettoriale.hpp posizione.hpp
 puntomateriale.o : campovettoriale.hpp posizione.hpp particella.hpp
 	g++ -c puntomateriale.cpp -o puntomateriale.o
 #Pulizia file oggetti
-cleano :
+clean :
 	rm *.o
 #Pulizia eseguibili
 cleanx :
