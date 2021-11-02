@@ -111,7 +111,6 @@ void test_newton_law(){
   Posizione p{-2, 4, 1};
   
   CampoVettoriale V{particella.CampoGravitazionale(p)};
-  cout << V.getFx() << " " << V.getFy() << " " << V.getFz() << endl;
   assert(are_close(V.getFx(), -1.0302576701177));
   assert(are_close(V.getFy(), 0.14717966715968));
   assert(are_close(V.getFz(), 0.44153900147903));
