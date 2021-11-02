@@ -3,8 +3,11 @@
 
 #include "TApplication.h"
 #include "TGraph.h"
+#include "TAxis.h"
+#include "TPad.h"
+#include "TCanvas.h"
 
-#define d (double)1.E-10
+const double d = 1e-10;
 
 bool are_close(double, double);
 void test_coordinates();
@@ -47,6 +50,13 @@ int main(int argc, char** argv){
 
     TApplication app("app", 0, 0);
     TGraph campo = DoPlot(ele, pro, 100, 1000);
+    TCanvas c1;
+    c1.SetLogy();
+    c1.SetLogx();
+    campo.SetTitle("Andamento distanza-E logaritmico");
+    campo.GetXaxis()->SetTitle("Distanza [m]");
+    campo.GetYaxis()->SetTitle("Campo E [N/C]");
+    campo.GetXaxis()->SetRangeUser(100*d, 1000*d);
     campo.Draw("APC");
 
     app.Run();
