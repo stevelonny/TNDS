@@ -1,5 +1,5 @@
 #include "puntomateriale.hpp"
-#define eps0 (double)8.85418781762E-12
+#define eps0 (double)8.85E-12 /* 418781762 */
 #define G (double)6.67E-11
 //Costruttori e distruttore
 PuntoMateriale::PuntoMateriale(double massa, double carica, const Posizione& pos)
@@ -20,6 +20,7 @@ CampoVettoriale PuntoMateriale::CampoElettrico(const Posizione& pos) const {
     double E_x = k*(pos.getX()-getX());
     double E_y = k*(pos.getY()-getY());
     double E_z = k*(pos.getZ()-getZ());
+    cout << E_x << " " << E_y << " " << E_z << endl;
     //Restituiamo il campo generato nel punto pos
     return CampoVettoriale(pos, E_x, E_y, E_z);
 }
