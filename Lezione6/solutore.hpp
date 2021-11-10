@@ -34,4 +34,12 @@ class Bisezione : public Solutore {
         double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec = 1e-3, unsigned int nmax = 100) override;
 };
 
+class Secante : public Solutore{
+    public:
+        Secante();
+        Secante(double prec);
+        virtual ~Secante();
+        double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec = 1e-3, unsigned int nmax = 100) override;
+};
+
 #endif //__solutore_hpp__

@@ -43,6 +43,12 @@ Bisezione::Bisezione(double prec) {
 }
 Bisezione::~Bisezione(){}
 double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec /* = 1e-3 */, unsigned int nmax /* = 100 */){
+    //cerr << " " << m_niterations << " ";
+    if(found==true||m_niterations>=m_nmax){
+        //Puliamo il solutore
+        m_niterations = 0;
+        found = false;
+    }
     /* Passaggio 0 */
     //Impostiamo i parametri di ricerca
     m_prec = prec;
@@ -98,6 +104,87 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     }
     found = true;
     return (fabs(m_a-m_b)<m_prec ? med : nan(""));
+}
+
+/* Metodi della Secante */
+Secante::Secante(){
+    found = false;
+    m_niterations = 0;
+}
+Secante::Secante(double prec) {
+    found = false;
+    m_niterations = 0;
+    m_prec = prec;
+}
+Secante::~Secante(){}
+double Secante::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec /* = 1e-3 */, unsigned int nmax /* = 100 */){
+    //cerr << " " << m_niterations << " ";
+    if(found==true||m_niterations>=m_nmax){
+        //Puliamo il solutore
+        m_niterations = 0;
+        found = false;
+    }
+    /* Passaggio 0 */
+    //Impostiamo i parametri di ricerca
+    m_prec = prec;
+    m_nmax = nmax;
+    //Impostiamo gli estremi di ricerca
+    m_a = xmin;
+    m_b = xmax;
+    //Calcolo la secante tra f(m_a) e f(m_b)
+    double sec0 = m_b - (f.Eval(m_b)*(m_a-m_b))/(f.Eval(m_a)-f.Eval(m_b));
+    //Ottengo il segno degli estremi e della mediana
+    double sign_a{sign(f.Eval(m_a))};
+    double sign_b{sign(f.Eval(m_b))};
+    double sign_sec0{sign(f.Eval(sec0))};
+    //Controlliamo che gli estremi o la mediana non siano già lo zero della funzione
+    if(sign_a==0||sign_b==0){
+        found = true;
+        return (sign_a == 0 ? m_a : m_b);
+    }
+    else if(sign_sec0==0){
+        m_niterations++;
+        if(m_niterations>=m_nmax){
+            found = false;
+            return nan("");
+        }
+        found = true;
+        return sec0;
+    }
+    else if(sign_a*sign_b>0){
+        found = false;
+        return nan("");
+    }
+    /* Passaggio sium */
+    //cout << m_niterations << " " << fabs(m_a-m_b) << " " << m_a << " " << sign_a << " " << m_b << " " << sign_b << " " << sec0 << " " << sign_sec0 << endl;
+    while(fabs(m_a-m_b)>=m_prec){
+        if(sign_a*sign_sec0<0){ //Se sta a sx richiamiamo CercaZeri sull'intorno [m_a,med]
+            m_niterations++;
+            if(m_niterations>=m_nmax){//Controllo se non ha finito i tentativi
+                found = false;
+                return sec0;
+            }
+            else if(fabs(m_b-sec0)<=m_prec){
+                found = true;
+                return sec0;
+            }
+            return Secante::CercaZeriReference(m_a, sec0, f, prec, nmax);
+        }
+        else if(sign_sec0*sign_b<0){ //Se sta a dx richiamiamo CercaZeri sull'intorno [med,m_b]
+            m_niterations++;
+            if(m_niterations>=m_nmax){ //Controllo se non ha finito i tentativi
+                found = false;
+                return sec0;
+            }
+            else if(fabs(m_a-sec0)<=m_prec){
+                found = true;
+                return sec0;
+            }
+            return Secante::CercaZeriReference(sec0, m_b, f, prec, nmax);
+        }
+    }
+    found = true;
+    return (fabs(m_a-m_b)<m_prec ? sec0 : nan(""));
 }
 
 double sign(double x){

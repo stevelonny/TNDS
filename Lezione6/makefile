@@ -1,3 +1,7 @@
+tansecvsbis : tansecvsbis.o funzioni.o solutore.o
+	g++ tansecvsbis.o funzioni.o solutore.o format.cc -o tansecvsbis.x
+provasecante : provasecante.o funzioni.o solutore.o
+	g++ provasecante.o funzioni.o solutore.o -o provasecante.x
 esercizio6.3 : esercizio6.3.o funzioni.o solutore.o
 	g++ esercizio6.3.o funzioni.o solutore.o -o esercizio6.3.x
 esercizio6.2 : esercizio6.2.o funzioni.o solutore.o
@@ -6,6 +10,10 @@ esercizio6.1 : esercizio6.1.o funzioni.o
 	g++ esercizio6.1.o funzioni.o -o esercizio6.1.x
 esercizio6.0 : esercizio6.0.o particella.o
 	g++ esercizio6.0.o particella.o -o esercizio6.0.x
+tansecvsbis.o : funzioni.hpp solutore.hpp tansecvsbis.cpp
+	g++ -c tansecvsbis.cpp -o tansecvsbis.o
+provasecante.o : funzioni.hpp solutore.hpp provasecante.cpp
+	g++ -c provasecante.cpp -o provasecante.o
 esercizio6.3.o : funzioni.hpp solutore.hpp esercizio6.3.cpp
 	g++ -c esercizio6.3.cpp -o esercizio6.3.o
 esercizio6.2.o : funzioni.hpp solutore.hpp esercizio6.2.cpp
