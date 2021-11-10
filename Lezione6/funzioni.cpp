@@ -26,4 +26,10 @@ double Parabola::getA() const {return m_a;}
 double Parabola::getB() const {return m_b;}
 double Parabola::getC() const {return m_c;}
 
-
+/* x_Tanx ovvero x-tan(x)*/
+x_Tanx::x_Tanx() {}
+x_Tanx::~x_Tanx() {} 
+ 
+double x_Tanx::Eval(double x) const{
+    return /* x-tan(x) */ sin(x)-x*cos(x);
+}

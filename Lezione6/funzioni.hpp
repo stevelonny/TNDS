@@ -13,7 +13,6 @@ class FunzioneBase{
         virtual ~FunzioneBase();
 };
 
-
 class Parabola: public FunzioneBase{
     public:
         Parabola();
@@ -32,6 +31,13 @@ class Parabola: public FunzioneBase{
 
     private:
         double m_a, m_b, m_c;
+};
+
+class x_Tanx : public FunzioneBase{
+    public:
+        x_Tanx();
+        virtual ~x_Tanx();
+        double Eval(double x) const override;
 };
 
 #endif //__funzioni_hpp__

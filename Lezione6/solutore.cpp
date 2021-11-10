@@ -51,11 +51,14 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     m_a = xmin;
     m_b = xmax;
     //Calcolo la mediana tra dell'intervallo [m_a,m_b]
-    double med = m_a+(m_b-m_a)*0.5;
+    double med = (m_a+m_b)*0.5;
     //Ottengo il segno degli estremi e della mediana
     double sign_a{sign(f.Eval(m_a))};
+    //cerr << " " << sign_a << " ";
     double sign_b{sign(f.Eval(m_b))};
+    //cerr << " " << sign_b << " ";
     double sign_med{sign(f.Eval(med))};
+    //cerr << " " << sign_med << " ";
     //Controlliamo che gli estremi o la mediana non siano già lo zero della funzione
     if(sign_a==0||sign_b==0){
         found = true;
@@ -64,12 +67,14 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     else if(sign_med==0){
         m_niterations++;
         if(m_niterations>=m_nmax){
+            found = false;
             return nan("");
         }
         found = true;
         return med;
     }
     else if(sign_a*sign_b>0){
+        found = false;
         return nan("");
     }
     /* Passaggio sium */
@@ -77,6 +82,7 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
         if(sign_a*sign_med<0){ //Se sta a sx richiamiamo CercaZeri sull'intorno [m_a,med]
             m_niterations++;
             if(m_niterations>=m_nmax){//Controllo se non ha finito i tentativi
+                found = false;
                 return med;
             }
             return Bisezione::CercaZeriReference(m_a, med, f, prec, nmax);
@@ -84,6 +90,7 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
         else if(sign_med*sign_b<0){ //Se sta a dx richiamiamo CercaZeri sull'intorno [med,m_b]
             m_niterations++;
             if(m_niterations>=m_nmax){ //Controllo se non ha finito i tentativi
+                found = false;
                 return med;
             }
             return Bisezione::CercaZeriReference(med, m_b, f, prec, nmax);
