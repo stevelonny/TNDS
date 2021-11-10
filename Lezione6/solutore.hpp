@@ -1,8 +1,11 @@
-//#pragma once
-#ifndef __solutore_hpp__
-#define __solutore_hpp__
+#pragma once
+//#ifndef __solutore_hpp__
+//#define __solutore_hpp__
 
 #include "funzioni.hpp"
+
+#define M_PREC 1e-3
+#define N_MAX 100
 
 using namespace std;
 
@@ -42,4 +45,4 @@ class Secante : public Solutore{
         double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec = 1e-3, unsigned int nmax = 100) override;
 };
 
-#endif //__solutore_hpp__
+//#endif //__solutore_hpp__

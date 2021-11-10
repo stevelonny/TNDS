@@ -3,9 +3,11 @@
 double sign(double x);
 
 /* Metodi Solutore */
-Solutore::Solutore() : found{false} {}
+Solutore::Solutore() : found{false}, m_nmax{N_MAX}, m_prec{M_PREC} {}
 Solutore::~Solutore(){}
 double Solutore::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec /* = 1e-3 */, unsigned int nmax /* = 100 */){
+    m_prec = (m_prec == M_PREC ? prec : m_prec) ;
+    m_nmax = (m_nmax == N_MAX ? nmax : m_nmax);
     found = false;
     return 0;
 }
@@ -35,11 +37,14 @@ unsigned int Solutore::getNIterations() const {
 Bisezione::Bisezione(){
     found = false;
     m_niterations = 0;
+    m_prec = M_PREC;
+    m_nmax = N_MAX;
 }
 Bisezione::Bisezione(double prec) {
     found = false;
     m_niterations = 0;
     m_prec = prec;
+    m_nmax = N_MAX;
 }
 Bisezione::~Bisezione(){}
 double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec /* = 1e-3 */, unsigned int nmax /* = 100 */){
@@ -51,8 +56,8 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     }
     /* Passaggio 0 */
     //Impostiamo i parametri di ricerca
-    m_prec = prec;
-    m_nmax = nmax;
+    m_prec = (m_prec == M_PREC ? prec : m_prec);
+    m_nmax = (m_nmax == N_MAX ? nmax : m_nmax);
     //Impostiamo gli estremi di ricerca
     m_a = xmin;
     m_b = xmax;
@@ -60,11 +65,8 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     double med = (m_a+m_b)*0.5;
     //Ottengo il segno degli estremi e della mediana
     double sign_a{sign(f.Eval(m_a))};
-    //cerr << " " << sign_a << " ";
     double sign_b{sign(f.Eval(m_b))};
-    //cerr << " " << sign_b << " ";
     double sign_med{sign(f.Eval(med))};
-    //cerr << " " << sign_med << " ";
     //Controlliamo che gli estremi o la mediana non siano già lo zero della funzione
     if(sign_a==0||sign_b==0){
         found = true;
@@ -110,24 +112,26 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
 Secante::Secante(){
     found = false;
     m_niterations = 0;
+    m_prec = M_PREC;
+    m_nmax = N_MAX; 
 }
 Secante::Secante(double prec) {
     found = false;
     m_niterations = 0;
     m_prec = prec;
+    m_nmax = N_MAX;
 }
 Secante::~Secante(){}
 double Secante::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec /* = 1e-3 */, unsigned int nmax /* = 100 */){
-    //cerr << " " << m_niterations << " ";
     if(found==true||m_niterations>=m_nmax){
-        //Puliamo il solutore
+        //Resettiamo il solutore
         m_niterations = 0;
         found = false;
     }
     /* Passaggio 0 */
-    //Impostiamo i parametri di ricerca
-    m_prec = prec;
-    m_nmax = nmax;
+    //Impostiamo i parametri di ricerca (controllando che non siano già stati cambiati con setPrecision e setNMax)
+    m_prec = (m_prec == M_PREC ? prec : m_prec);
+    m_nmax = (m_nmax == N_MAX ? nmax : m_nmax);
     //Impostiamo gli estremi di ricerca
     m_a = xmin;
     m_b = xmax;
@@ -155,8 +159,12 @@ double Secante::CercaZeriReference(double xmin, double xmax, const FunzioneBase 
         found = false;
         return nan("");
     }
+    /* if(fabs(m_a-m_b)<=m_prec){
+        found = true;
+        return sec0;
+    } */
     /* Passaggio sium */
-    //cout << m_niterations << " " << fabs(m_a-m_b) << " " << m_a << " " << sign_a << " " << m_b << " " << sign_b << " " << sec0 << " " << sign_sec0 << endl;
+    //cerr << m_niterations << " " << fabs(m_a-m_b) << " " << m_a << " " << sign_a << " " << m_b << " " << sign_b << " " << sec0 << " " << sign_sec0 << endl;
     while(fabs(m_a-m_b)>=m_prec){
         if(sign_a*sign_sec0<0){ //Se sta a sx richiamiamo CercaZeri sull'intorno [m_a,med]
             m_niterations++;
