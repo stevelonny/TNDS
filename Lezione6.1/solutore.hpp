@@ -25,11 +25,13 @@ class Solutore{
 
     protected:
         virtual void updateRPrec();
-        double m_a, m_b;
-        double m_prec;
-        unsigned int m_nmax, m_niterations;
-        bool found;
-        double r_prec;
+        double sign(double fx);
+        double m_a, m_b; //Estremi della ricerca
+        double m_prec; //Precisione richiesta
+        unsigned int m_nmax, m_niterations; //Massime iterazioni e iterazioni attuali
+        bool found; //Trovato oppure no il valore secondo la prec richiesta
+        double r_prec; //Precisione reale
+        double m_actual; //Valore trovato attuale
 };
 
 class Bisezione : public Solutore {
@@ -38,6 +40,8 @@ class Bisezione : public Solutore {
         Bisezione(double prec);
         virtual ~Bisezione();
         double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec = 1e-3, unsigned int nmax = 100) override;
+    private:
+        double CercaZeri(const FunzioneBase & f);
 };
 
 class Secante : public Solutore{
@@ -46,6 +50,8 @@ class Secante : public Solutore{
         Secante(double prec);
         virtual ~Secante();
         double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec = 1e-3, unsigned int nmax = 100) override;
+    private:
+        void updateRPrec() override;
+        double CercaZeri(const FunzioneBase & f);
+        double m_o;
 };
-
-//#endif //__solutore_hpp__

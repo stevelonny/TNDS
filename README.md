@@ -1,5 +1,9 @@
 # Laboratorio di TNDS di steve
 
+## ToDo
+* Programma che controlla la precisione della secante reale e passata man mano che l'ultima aumenta sulla stessa funzione
+
+
 ## Lezione 1
 statistica and co
 
