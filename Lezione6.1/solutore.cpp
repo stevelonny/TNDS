@@ -56,6 +56,7 @@ Bisezione::~Bisezione() {}
 double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec, unsigned int nmax){
     //Resettiamo il solutore
     if(found==true||m_niterations>=m_nmax){
+        //cerr << "reset bis " << m_prec;
         found = false;
         m_niterations = 0;
     }
@@ -66,8 +67,8 @@ double Bisezione::CercaZeriReference(double xmin, double xmax, const FunzioneBas
     }
     m_a = xmin;
     m_b = xmax;
-    m_prec = (m_prec == M_PREC ? prec : m_prec);
-    m_nmax = (m_nmax == N_MAX ? nmax : m_nmax);
+    m_prec = prec /* (m_prec == M_PREC ? prec : m_prec) */;
+    m_nmax = nmax /* (m_nmax == N_MAX ? nmax : m_nmax) */;
     return Bisezione::CercaZeri(f);    
 }
 //Funzione privata
@@ -82,7 +83,7 @@ double Bisezione::CercaZeri(const FunzioneBase & f){
         found = true;
         return m_actual;
     }
-    m_actual = (m_a+m_b)/2;
+    m_actual = m_a+(m_b-m_a)/2;
     double sign_a{sign(f.Eval(m_a))};
     double sign_b{sign(f.Eval(m_b))};
     double sign_med{sign(f.Eval(m_actual))};
@@ -120,6 +121,7 @@ Secante::~Secante() {}
 double Secante::CercaZeriReference(double xmin, double xmax, const FunzioneBase & f, double prec, unsigned int nmax){
     //Resettiamo il solutore
     if(found==true||m_niterations>=m_nmax){
+        //cerr << "reset sec" << endl;
         found = false;
         m_niterations = 0;
         r_prec = nan("");
@@ -131,8 +133,8 @@ double Secante::CercaZeriReference(double xmin, double xmax, const FunzioneBase 
     }
     m_a = xmin;
     m_b = xmax;
-    m_prec = (m_prec == M_PREC ? prec : m_prec);
-    m_nmax = (m_nmax == N_MAX ? nmax : m_nmax);
+    m_prec = prec /* (m_prec == M_PREC ? prec : m_prec) */;
+    m_nmax = nmax /* (m_nmax == N_MAX ? nmax : m_nmax) */;
     return Secante::CercaZeri(f);    
 }
 //Funzione privata
@@ -150,7 +152,7 @@ double Secante::CercaZeri(const FunzioneBase & f){
     double sign_a{sign(f.Eval(m_a))};
     double sign_b{sign(f.Eval(m_b))};
     double sign_sec{sign(f.Eval(m_actual))};
-    //Controlliamo che gli estremi o la mediana non siano già lo zero della funzione
+    //Controlliamo che gli estremi o la sec0 non siano già lo zero della funzione
     if(sign_a==0||sign_b==0){
         found = true;
         return (sign_a == 0 ? m_a : m_b);
@@ -159,10 +161,13 @@ double Secante::CercaZeri(const FunzioneBase & f){
         found = true;
         return m_actual;
     }
-    m_o = (sign_b*sign_sec<0?m_a:m_b);
+    //Assegniamo i nuovi estremi
+    m_o = (sign_b*sign_sec<0?m_a:m_b); //necessario per il calcolo della precisione, conserva l'estremo precedente
     m_a = (sign_b*sign_sec<0?m_actual:m_a);
     m_b = (sign_a*sign_sec<0?m_actual:m_b);
+    //Aggiorniamo la precisione
     updateRPrec();
+    //Richiamiamo la funzione iterativa
     return CercaZeri(f);    
 }
 

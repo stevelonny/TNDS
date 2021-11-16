@@ -1,3 +1,5 @@
+sium : sium.o funzioni.o solutore.o
+	g++ sium.o funzioni.o solutore.o format.cc -o sium.x
 tansecvsbis : tansecvsbis.o funzioni.o solutore.o
 	g++ tansecvsbis.o funzioni.o solutore.o format.cc -o tansecvsbis.x
 provasecante : provasecante.o funzioni.o solutore.o
@@ -10,6 +12,8 @@ esercizio6.1 : esercizio6.1.o funzioni.o
 	g++ esercizio6.1.o funzioni.o -o esercizio6.1.x
 esercizio6.0 : esercizio6.0.o particella.o
 	g++ esercizio6.0.o particella.o -o esercizio6.0.x
+sium.o : funzioni.hpp solutore.hpp sium.cpp
+	g++ -c sium.cpp -o sium.o
 tansecvsbis.o : funzioni.hpp solutore.hpp tansecvsbis.cpp
 	g++ -c tansecvsbis.cpp -o tansecvsbis.o
 provasecante.o : funzioni.hpp solutore.hpp provasecante.cpp
