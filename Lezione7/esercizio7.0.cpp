@@ -6,7 +6,7 @@
 using namespace std;
 
 bool are_close(double calculated, double expected);
-void test();
+void test_midpoint();
 
 int main(int argc, const char** argv){
 
@@ -17,7 +17,7 @@ int main(int argc, const char** argv){
 
     int maxstep{atoi(argv[1])};
     int passo{atoi(argv[2])};
-    test();
+    test_midpoint();
     int cfr = (log10(maxstep)>8?log10(maxstep):8);
     Seno sen;
     Midpoint mid;
@@ -38,20 +38,14 @@ int main(int argc, const char** argv){
     return 0;
 }
 
-void test(){
+void test_midpoint(){
     Seno mysin;
     Midpoint mp;
-    Simpson sp;
     assert(are_close(mp.Integrate(0, M_PI, 10, mysin), 2.0082484079079745));
     assert(are_close(mp.Integrate(0, M_PI, 100, mysin), 2.000082249070986));
     assert(are_close(mp.Integrate(M_PI, 0, 10, mysin), -2.0082484079079745));
     assert(are_close(mp.Integrate(0, 1, 10, mysin), 0.45988929071851814));
     assert(are_close(mp.Integrate(1, 2, 30, mysin), 0.9564934239032155));
-    //assert(are_close(sp.Integrate(0, M_PI, 10, mysin), 2.0082484079079745));
-    //assert(are_close(sp.Integrate(0, M_PI, 100, mysin), 2.000082249070986));
-    //assert(are_close(sp.Integrate(M_PI, 0, 10, mysin), -2.0082484079079745));
-    //assert(are_close(sp.Integrate(0, 1, 10, mysin), 0.45988929071851814));
-    //assert(are_close(sp.Integrate(1, 2, 30, mysin), 0.9564934239032155));
 }
 
 bool are_close(double calculated, double expected) {
