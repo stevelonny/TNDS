@@ -22,7 +22,15 @@ Tante classi per arrivare al dipolo. Uso di root per il grafico del dipolo manna
 ## Lezione 6
 Ricerca degli zeri con il metodo della bisezione e della secante.
 
-Da chiedere al prof:
+## Lezione 7
+Integrazione
+
+## Lezione 8-9-10?
+Equazioni differenziali, metodo di Eulero e Runge-Kutta, oscillatore armonico semplice (pure disegnato), pendolo (graficato con ricerca del periodo)
+
+_Manca Kutta con precisione passata(?), oscillatore forzato, disegni strani animati_ 
+
+## Da chiedere al prof:
 
 * come passare gli argomenti alla funzione cercazeri in relazione alla precisione e al numero massimo di iterazioni (che vengono poste ai valori predefiniti se non passati, anche se vengono settati con setPrecisione e setNMax) _(Dovrei aver risolto ma chiedere comunque un metodo più carino)_
 * perchè usando l'estremo opposto a quello che sto considerando per fare la distanza da sottomettere alla precisione funziona lo stesso nella secante
