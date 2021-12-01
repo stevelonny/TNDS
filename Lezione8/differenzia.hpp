@@ -14,3 +14,10 @@ class Eulero : public EquazioneDifferenzialeBase{
         virtual ~Eulero();
         virtual vector<double> Passo(double t, vector<double> stat, double h, FunzioneVettorialeBase &f) override;
 };
+
+class Kutta : public EquazioneDifferenzialeBase{
+    public:
+        Kutta();
+        virtual ~Kutta();
+        virtual vector<double> Passo(double t, vector<double> stat, double h, FunzioneVettorialeBase &f) override;
+};

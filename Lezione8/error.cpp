@@ -66,13 +66,6 @@ int main(int argc, const char** argv){
     eul0001 ->SetLineColor(kYellow);
 
     TMultiGraph *mgr{new TMultiGraph()};
-    TLegend *mylegend{new TLegend()};
-    mylegend->AddEntry(senx, "Sen(x)", "LP");
-    mylegend->AddEntry(eul01, "h = 0.1 s", "LP");
-    mylegend->AddEntry(eul001, "h = 0.01 s", "LP");
-    mylegend->AddEntry(eul0001, "h = 0.001 s", "LP");
-
-    mylegend->Draw();
 
     TCanvas *c{new TCanvas()};
     c->cd();
@@ -90,12 +83,24 @@ int main(int argc, const char** argv){
     eul001  ->SetLineColor(kGreen);
     eul0001 ->SetLineColor(kYellow);
 
+    eul01   ->SetTitle("h=0.1 s");
+    eul001  ->SetTitle("h=0.01 s");
+    eul0001 ->SetTitle("h=0.001 s");
+
     mgr->SetTitle("Eulero diversi passi h");
     mgr->GetXaxis()->SetTitle("Tempo t [s]");
     mgr->GetYaxis()->SetTitle("Posizione x [m]");
 
     mgr->Draw("ALP");
+    c->BuildLegend();
+    /* TLegend *mylegend{new TLegend(0.2, 0.6, 0.4, 0.8)};
+    mylegend->AddEntry(senx, "Sen(x)", "LP");
+    mylegend->AddEntry(eul01, "h = 0.1 s", "LP");
+    mylegend->AddEntry(eul001, "h = 0.01 s", "LP");
+    mylegend->AddEntry(eul0001, "h = 0.001 s", "LP");
 
+    mylegend->Draw();
+     */
     myApp.Run();
 
     return 0;
