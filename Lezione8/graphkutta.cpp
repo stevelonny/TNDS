@@ -33,7 +33,8 @@ int main(int argc, const char** argv){
         myGraph.SetPoint(i, t, x[0]);
         x = kut.Passo(t,x,h,osc);
         t += h;
-    }    
+    }
+    cout << "Posizione finale: " << x[0] << endl << "Velocità finale: " << x[1] << endl;
     TCanvas c;
     c.cd();
     string title = "Oscillatore armonico Runge-Kutta, h = ";

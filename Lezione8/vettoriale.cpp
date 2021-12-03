@@ -46,16 +46,8 @@ void Pendolo::setG(double g){m_g = g;}
 void Pendolo::setLength(double l){m_l = l;}
 
 vector<double> Pendolo::Eval(vector<double> &pos, double t){
-    int dim = pos.size()/2;
-    vector<double> result(pos.size());
-    for(int i=0; i<pos.size(); i++){
-        if(i<dim){
-            result[i]=pos[i+dim];
-        }
-        else{
-            result[i]=(-(getG()/getLength()))*sin(pos[i-dim]);
-        }
-    }
+    vector<double> result(2);
+    result = {pos[1], (-(getG()/getLength()))*sin(pos[0])};
     return result;
 }
 

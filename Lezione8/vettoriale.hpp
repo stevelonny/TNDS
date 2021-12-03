@@ -2,7 +2,7 @@
 #include "operator.hpp"
 #include <cmath>
 
-#define G_ (double)9.8
+#define G_ (double)9.81
 
 using namespace std;
 
