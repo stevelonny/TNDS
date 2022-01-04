@@ -42,3 +42,21 @@ class Pendolo : public FunzioneVettorialeBase {
         double m_g;
         double m_l;
 };
+
+class OscillatoreArmonicoForzato : public FunzioneVettorialeBase {
+    public:
+        OscillatoreArmonicoForzato();
+        OscillatoreArmonicoForzato(double omega_0, double alpha, double omega);
+        virtual ~OscillatoreArmonicoForzato();
+        virtual vector<double> Eval(vector<double> &pos, double t) override;
+        const double getOmega0();
+        const double getOmega();
+        const double getAlpha();
+        void setOmega0(double omega_0);
+        void setOmega(double omega);
+        void setAlpha(double omega_0);
+    private:
+        double m_omega0;
+        double m_omega;
+        double m_alpha;
+};
