@@ -1,3 +1,5 @@
+#pragma once
+
 #include "funzioni.hpp"
 #include "random.hpp"
 

@@ -1,9 +1,17 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
+graphcarlo: graphcarlo.o random.o funzioni.o montecarlo.o
+	g++ graphcarlo.o ${LIBS} ${INCS} random.o funzioni.o montecarlo.o ../format.cc -o graphcarlo.x
+carlosampling: carlosampling.o random.o funzioni.o montecarlo.o
+	g++ carlosampling.o random.o funzioni.o montecarlo.o ../format.cc -o carlosampling.x
 provacarlo: provacarlo.o random.o funzioni.o montecarlo.o
 	g++ provacarlo.o random.o funzioni.o montecarlo.o ../format.cc -o provacarlo.x
 asd: asd.o random.o
 	g++ random.o asd.o ${LIBS} ${INCS} -o asd.x
+graphcarlo.o: funzioni.hpp random.hpp montecarlo.hpp graphcarlo.cpp ../fmtlib.h
+	g++ -c graphcarlo.cpp ${LIBS} ${INCS} -o graphcarlo.o 
+carlosampling.o: funzioni.hpp random.hpp montecarlo.hpp carlosampling.cpp ../fmtlib.h
+	g++ -c carlosampling.cpp -o carlosampling.o
 provacarlo.o: funzioni.hpp random.hpp montecarlo.hpp provacarlo.cpp ../fmtlib.h
 	g++ -c provacarlo.cpp -o provacarlo.o
 asd.o : random.hpp asd.cpp 
@@ -14,5 +22,5 @@ funzioni.o : funzioni.hpp funzioni.cpp
 	g++ -c funzioni.cpp -o funzioni.o
 montecarlo.o: funzioni.hpp random.hpp montecarlo.hpp montecarlo.cpp
 	g++ -c montecarlo.cpp -o montecarlo.o
-clean: *.o
+clean:
 	rm *.o
