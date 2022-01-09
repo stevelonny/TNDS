@@ -1,5 +1,7 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
+grapherror: grapherror.o random.o funzioni.o montecarlo.o
+	g++ grapherror.o ${LIBS} ${INCS} random.o funzioni.o montecarlo.o ../format.cc -o grapherror.x
 graphcarlo: graphcarlo.o random.o funzioni.o montecarlo.o
 	g++ graphcarlo.o ${LIBS} ${INCS} random.o funzioni.o montecarlo.o ../format.cc -o graphcarlo.x
 carlosampling: carlosampling.o random.o funzioni.o montecarlo.o
@@ -8,6 +10,8 @@ provacarlo: provacarlo.o random.o funzioni.o montecarlo.o
 	g++ provacarlo.o random.o funzioni.o montecarlo.o ../format.cc -o provacarlo.x
 asd: asd.o random.o
 	g++ random.o asd.o ${LIBS} ${INCS} -o asd.x
+grapherror.o: funzioni.hpp random.hpp montecarlo.hpp grapherror.cpp ../fmtlib.h
+	g++ -c grapherror.cpp ${LIBS} ${INCS} -o grapherror.o 
 graphcarlo.o: funzioni.hpp random.hpp montecarlo.hpp graphcarlo.cpp ../fmtlib.h
 	g++ -c graphcarlo.cpp ${LIBS} ${INCS} -o graphcarlo.o 
 carlosampling.o: funzioni.hpp random.hpp montecarlo.hpp carlosampling.cpp ../fmtlib.h
