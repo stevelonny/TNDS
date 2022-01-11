@@ -22,7 +22,10 @@ int main(){
         for(int j{0}; j<10000; j++){    
             temp = monte.Media(sen, 0., M_PI, sample_size[i]);
             file_out << temp << endl;
+            cout << j+1 << "/10000\r";
+            cout.flush();
         }
+        cout << endl;
         file_out.close();
     }
     fmt::print(stderr, "Calcoliamo infine i valori con il metodo hit-or-miss. Output: <sample_hit_N.dat>\n");
@@ -33,7 +36,10 @@ int main(){
         for(int j{0}; j<10000; j++){    
             temp = monte.Hit(sen, 0., M_PI, sample_size[i], 1.);
             file_out << temp << endl;
+            cout << j+1 << "/10000\r";
+            cout.flush();
         }
+        cout << endl;
         file_out.close();
     }
     fmt::print(stderr, "Terminato!\n");

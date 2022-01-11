@@ -146,12 +146,12 @@ int main(int argc, const char** argv){
     can_error.Print("errors.png");
 
     fmt::print("\nParametro k andamento erroe-N secondo la relazione errore=k/sqrt(N):\n");
-    fmt::print("Metodo della media k_media={0}\n", k_media);
-    fmt::print("Metodo hit-or-miss k_hit={0}\n", k_hit);
-    fmt::print("Punti necessari per arrivare alla precisione richiesta ({0}):\n", argv[0]);
+    fmt::print("Metodo della media k_media = {0}\n", k_media);
+    fmt::print("Metodo hit-or-miss k_hit = {0}\n", k_hit);
+    fmt::print("Punti necessari per arrivare alla precisione richiesta ({0}):\n", argv[1]);
     double prec{atof(argv[1])};
-    fmt::print("Metodo della media N_media={0}\n", (int)pow((k_media/prec), 2));
-    fmt::print("Metodo hit-or-miss N_hit={0}\n", (int)pow((k_hit/prec), 2));
+    fmt::print("Metodo della media N_media = {0}\n", (int)pow((k_media/prec), 2));
+    fmt::print("Metodo hit-or-miss N_hit = {0}\n", (int)pow((k_hit/prec), 2));
 
     return 0;
 }
