@@ -1,12 +1,13 @@
 #pragma once
 #include "TApplication.h"
 #include "TCanvas.h"
-#include "TH1D.h"
+#include "TH1F.h"
 #include "TGraph.h"
 #include "TAxis.h"
 #include "TLegend.h"
 #include "TImage.h"
 #include "TF1.h"
+#include "TH2F.h"
 #include "../fmtlib.h"
 #include <vector>
 

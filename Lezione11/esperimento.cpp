@@ -39,7 +39,7 @@ void EsperimentoPrisma::Esegui(){
 }
 
 void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
-    TCanvas can("sium", "sium", 3000, 2000);
+    TCanvas can("sium", "sium", 1500, 1000);
     vector<double> th0;
     vector<double> th1;
     vector<double> th2;
@@ -60,27 +60,36 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
         n2.push_back(getn2Mis());
         A.push_back(getAMis());
         B.push_back(getBMis());
+        cout << "Esperimento numero " << i+1 << "/" << n_volte << "\r";
+        cout.flush();
     }
+    std::cout << std::endl;
 
     TH1F histo_th0("Theta_0", "Theta_0", 100, *min_element(th0.begin(), th0.end()), *max_element(th0.begin(), th0.end()));
     TH1F histo_th1("Theta_1", "Theta_1", 100, *min_element(th1.begin(), th1.end()), *max_element(th1.begin(), th1.end()));
     TH1F histo_th2("Theta_2", "Theta_2", 100, *min_element(th2.begin(), th2.end()), *max_element(th2.begin(), th2.end()));
     TH1F histo_delta1("Delta_1", "Delta_1", 100, *min_element(delta1.begin(), delta1.end()), *max_element(delta1.begin(), delta1.end()));
     TH1F histo_delta2("Delta_2", "Delta_2", 100, *min_element(delta2.begin(), delta2.end()), *max_element(delta2.begin(), delta2.end()));
+    TH2F bhisto_delta("Delta", "Delta", 100, *min_element(delta1.begin(), delta1.end()), *max_element(delta1.begin(), delta1.end()), 100, *min_element(delta2.begin(), delta2.end()), *max_element(delta2.begin(), delta2.end()));
     TH1F histo_n1("n1", "n1", 100, *min_element(n1.begin(), n1.end()), *max_element(n1.begin(), n1.end()));
     TH1F histo_n2("n2", "n2", 100, *min_element(n2.begin(), n2.end()), *max_element(n2.begin(), n2.end()));
+    TH2F bhisto_n("n", "n", 100, *min_element(n1.begin(), n1.end()), *max_element(n1.begin(), n1.end()), 100, *min_element(n2.begin(), n2.end()), *max_element(n2.begin(), n2.end()));
     TH1F histo_A("A", "A", 100, *min_element(A.begin(), A.end()), *max_element(A.begin(), A.end()));
     TH1F histo_B("B", "B", 100, *min_element(B.begin(), B.end()), *max_element(B.begin(), B.end()));
+    TH2F bhisto_AB("AB", "AB", 100, *min_element(A.begin(), A.end()), *max_element(A.begin(), A.end()), 100, *min_element(B.begin(), B.end()), *max_element(B.begin(), B.end()));
     for(int i{0}; i<n_volte; i++){
         histo_th0.Fill(th0[i]);
         histo_th1.Fill(th1[i]);
         histo_th2.Fill(th2[i]);
         histo_delta1.Fill(delta1[i]);
         histo_delta2.Fill(delta2[i]);
+        bhisto_delta.Fill(delta1[i], delta2[i]);
         histo_n1.Fill(n1[i]);
         histo_n2.Fill(n2[i]);
+        bhisto_n.Fill(n1[i], n2[i]);
         histo_A.Fill(A[i]);
         histo_B.Fill(B[i]);
+        bhisto_AB.Fill(A[i], B[i]);
     }
     histo_th0.StatOverflows(kTRUE);
     histo_th1.StatOverflows(kTRUE);
@@ -91,7 +100,6 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     histo_n2.StatOverflows(kTRUE);
     histo_A.StatOverflows(kTRUE);
     histo_B.StatOverflows(kTRUE);
-    std::cout << std::endl;
     can.Divide(3,1);
     can.cd(1);
     histo_th0.Draw();
@@ -100,27 +108,30 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     can.cd(3);
     histo_th2.Draw();
     can.Print("theta.png");
-    can.Clear();
-    can.Divide(2,1);
+    can.Clear("D");
     can.cd(1);
     histo_delta1.Draw();
     can.cd(2);
     histo_delta2.Draw();
+    can.cd(3);
+    bhisto_delta.Draw();
     can.Print("delta.png");
-    can.Clear();
-    can.Divide(2,1);
+    can.Clear("D");
     can.cd(1);
     histo_n1.Draw();
     can.cd(2);
     histo_n2.Draw();
+    can.cd(3);
+    bhisto_n.Draw();
     can.Print("indici.png");
-    can.Clear();
-    can.Divide(2,1);
+    can.Clear("D");
     can.cd(1);
     histo_A.Draw();
     can.cd(2);
     histo_B.Draw();
+    can.cd(3);
+    bhisto_AB.Draw();
     can.Print("AB.png");
-    can.Clear();
+    can.Clear("D");
     //fmt::print("Theta0 = {0} +- {1}\n", histo_th0.GetMean(), histo_th0.GetStdDev();)
 }
