@@ -16,6 +16,7 @@ int main(int argc, const char** argv){
     unsigned int max = (atoi(argv[2]) > 0 ? atoi(argv[2]) : 100);
     double prec = atof(argv[1]);
     int cfrmax = (round(log10(max)+0.5)>3?round(log10(max)+0.5):3);
+    fmt::print("Questo programma mette a confronto il metodo dell bisezione e quello della secante per trovare gli 0 dell'equazione x-tan(x)\n\n");
     x_Tanx fun;
     Bisezione sol;
     vector<double> valori;
@@ -31,7 +32,7 @@ int main(int argc, const char** argv){
     //fmt::print("{0:<2s} || {1:<{7}s} | {2:<5s} | {3:<{8}s} | {9:<8s} || {4:<{7}s} | {2:<5s} | {3:<{8}s} | {9:<8s} || {5:<13s} | {6:<15s}\n",
     //            "n", "Bisezione", "Found", "nit", "Secante", "Delta*prec^-1", "Corrispondono?", 3+(int)(-log10(prec)), cfrmax, "RPrec");
     string top = fmt::format("{0:<2s} || {1:<{7}s} | {2:<5s} | {3:<{8}s} | {9:<8s} || {4:<{7}s} | {2:<5s} | {3:<{8}s} | {9:<8s} || {5:<13s} | {6:<15s}\n",
-                "n", "Bisezione", "Found", "nit", "Secante", "Delta*prec^-1", "Corrispondono?", 3+(int)(-log10(prec)), cfrmax, "RPrec");
+                "n", "Bisezione", "Found", "nit", "Secante", "Delta*prec^-1", "Corrispondono?", (3+(int)(-log10(prec)))<9?9:(3+(int)(-log10(prec))), cfrmax, "RPrec");
     file_out.open("out.txt");
     file_out << top;
     cout << top;
@@ -46,7 +47,7 @@ int main(int argc, const char** argv){
         valsecite.push_back(sec.getNIterations());
         top = fmt::format("{0:<2} || {1:>{9}.{10}f} | {2:<5s} | {3:<{11}} | {12:<8.1e} || {4:>{9}.{10}f} | {5:<5s} | {6:<{11}} | {13:<8.1e} || {7:>13.1f} | {8:<9s}\n",
                     i+1, valori[i], (valfound[i]?"Sì":"No"), valite[i], valsec[i], (valsecfound[i]?"Sì":"No"), valsecite[i], (valori[i]-valsec[i])*(1/prec), (abs(valori[i]-valsec[i])<prec?"Sì":"No"),
-                    3+(int)(-log10(prec)), (int)(-log10(prec)), cfrmax, valoriprec[i], valsecprec[i]);
+                    (3+(int)(-log10(prec)))<9?9:(3+(int)(-log10(prec))), (int)(-log10(prec)), cfrmax, valoriprec[i], valsecprec[i]);
         file_out << top;
         cout << top;
     }
