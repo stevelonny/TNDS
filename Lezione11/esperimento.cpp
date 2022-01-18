@@ -39,7 +39,7 @@ void EsperimentoPrisma::Esegui(){
 }
 
 void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
-    TCanvas can("sium", "sium", 1500, 1000);
+    TCanvas can("sium", "sium", 1600, 900);
     vector<double> th0;
     vector<double> th1;
     vector<double> th2;
@@ -96,10 +96,13 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     histo_th2.StatOverflows(kTRUE);
     histo_delta1.StatOverflows(kTRUE);
     histo_delta2.StatOverflows(kTRUE);
+    bhisto_delta.StatOverflows(kTRUE);
     histo_n1.StatOverflows(kTRUE);
     histo_n2.StatOverflows(kTRUE);
+    bhisto_n.StatOverflows(kTRUE);
     histo_A.StatOverflows(kTRUE);
     histo_B.StatOverflows(kTRUE);
+    bhisto_AB.StatOverflows(kTRUE);
     can.Divide(3,1);
     can.cd(1);
     histo_th0.Draw();
@@ -133,5 +136,10 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     bhisto_AB.Draw();
     can.Print("AB.png");
     can.Clear("D");
-    //fmt::print("Theta0 = {0} +- {1}\n", histo_th0.GetMean(), histo_th0.GetStdDev();)
+    vector<string> value_names{"th0", "th1", "th2", "delta1", "delta2", "n1", "n2", "A", "B"};
+    fmt::print("Correlazione delta:      {0:2.0f}%\n", bhisto_delta.GetCorrelationFactor()*100);
+    fmt::print("Correlazione indici:     {0:2.0f}%\n", bhisto_n.GetCorrelationFactor()*100);
+    fmt::print("Correlazione AB:        {0:2.0f}%\n", bhisto_AB.GetCorrelationFactor()*100);
+
+    fmt::print("Terminato!\n");
 }

@@ -1,7 +1,7 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
 main : main.cpp esperimento.o random.o main.o
-	g++ random.o esperimento.o ${LIBS} ${INCS} main.o -o main.x
+	g++ random.o esperimento.o ../format.cc ${LIBS} ${INCS} main.o -o main.x
 main.o : esperimento.hpp random.hpp main.cpp
 	g++ -c main.cpp ${LIBS} ${INCS} -o main.o
 esperimento.o : esperimento.cpp esperimento.hpp random.hpp

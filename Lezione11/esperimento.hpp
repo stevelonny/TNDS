@@ -8,6 +8,7 @@
 #include "TImage.h"
 #include "TF1.h"
 #include "TH2F.h"
+#include "TLegend.h"
 #include "../fmtlib.h"
 #include <vector>
 
