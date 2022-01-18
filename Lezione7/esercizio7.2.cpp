@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, const char** argv){
     
     if(argc != 2){
-        fmt::print(stderr, "Troppi pochi argomenti!\nUso del programma : {0} <prec>", argv[0]);
+        fmt::print(stderr, "Troppi pochi argomenti!\nUso del programma : {0} <prec>\n", argv[0]);
         exit(-1);
     }
 

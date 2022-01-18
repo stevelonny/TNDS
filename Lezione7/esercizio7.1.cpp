@@ -1,5 +1,11 @@
 #include "integratore.hpp"
 
+#include "TApplication.h"
+#include "TAxis.h"
+#include "TCanvas.h"
+#include "TGraph.h"
+#include "TMultiGraph.h"
+#include "TLegend.h"
 #include "fmtlib.h"
 #include <cassert>
 
@@ -14,7 +20,8 @@ int main(int argc, const char** argv){
         fmt::print(stderr, "Troppi pochi argomenti!\nUso del programma: {0} <max_passi> <larghezza_passi>\nVerrà creata una tabella di <max_passi>/<larghezza_passi> righe, con ogni riga che riassume <larghezza_passi>\n", argv[0]);
         exit(-1);
     }
-
+    TGraph * midgraph = new TGraph; 
+    TGraph * simgraph = new TGraph;
     int maxstep{atoi(argv[1])};
     int passo{atoi(argv[2])};
     test_midpoint();
@@ -26,15 +33,45 @@ int main(int argc, const char** argv){
                 "N. Passi"/*0*/, "Larghezza"/*1*/, "Midpoint"/*2*/, "Delta"/*3*/, cfr/*4*/, "Mid"/*5*/, "Sim"/*6*/, "Simpson"/*7*/);
     double intemp{};
     double intesp{};
+    double max{}, min{};
     for(int i=passo; i<=maxstep+1; i+=passo){
         intemp = mid.Integrate(0, M_PI, i, sen);
         intesp = sim.Integrate(0, M_PI, i, sen);
+        max = (i==passo?fabs(intemp-2):max);
         //cout << inte << " ";
         //cout << delta << endl;
         fmt::print("{0:<{4}} || {1:<14.12f} | {2:<14.12f} | {3:<14.12f} || {5:<14.12f} | {6:<14.12f} | {7:<14.12f}\n",
                   i, mid.getH(), intemp, fabs(intemp-2), cfr, sim.getH(), intesp, fabs(intesp-2));
-    }
-
+        midgraph->SetPoint(i/passo, i, fabs(intemp-2.));
+        simgraph->SetPoint(i/passo, i, fabs(intesp-2.));
+        min = fabs(intesp-2);
+    }   
+    TCanvas can("Errori", "Errori", 800, 600);
+    TMultiGraph sium("Errori", "Errori");
+    midgraph->SetTitle("Midpoint");
+    midgraph->SetMarkerColor(2);
+    simgraph->SetTitle("Simpson");
+    simgraph->SetMarkerColor(4);
+    //sium.Add(midgraph);
+    //sium.Add(simgraph);
+    //midgraph->Draw("A*");
+    //simgraph->Draw("*");
+    can.cd();
+    can.SetLogx();
+    can.SetLogy();
+    can.cd();
+    simgraph->SetMinimum(min*1e-1);
+    simgraph->SetMaximum(max*10);
+    simgraph->GetXaxis()->SetLimits(passo-passo/2, maxstep+passo);
+    simgraph->Draw("A*");
+    can.cd();
+    midgraph->Draw("*");
+    can.Modified();
+    midgraph->GetXaxis()->SetTitle("Numero di passi");
+    midgraph->GetYaxis()->SetTitle("Errore");
+    can.BuildLegend();
+    can.SetTitle("Andamento Passi-Errore");
+    can.Print("errori.png");
     return 0;
 }
 
