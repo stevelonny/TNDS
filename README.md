@@ -26,10 +26,9 @@ La corretta implementazione della secante è contenuta in _/Lezione6.1_
 ## Lezione 7
 Integrazione
 
-## Lezione 8-9-10?
-Equazioni differenziali, metodo di Eulero e Runge-Kutta, oscillatore armonico semplice (pure disegnato), pendolo (graficato con ricerca del periodo)
-
-_Manca Kutta con precisione passata(?), oscillatore forzato, disegni strani animati_ 
+## Lezione 8-9
+Equazioni differenziali, metodo di Eulero e Runge-Kutta, oscillatore armonico semplice (pure disegnato con ricerca della frequenza di risonanza contenuta in  _riproviamo_ ), pendolo (graficato con ricerca del periodo)
+manca solo il confronto diretto tra kutta e eulero
 
 ## Da chiedere al prof:
 

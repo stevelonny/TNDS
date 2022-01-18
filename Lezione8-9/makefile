@@ -1,23 +1,23 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
-riproviamo: riproviamo.o
-	g++ riproviamo.o differenzia.o vettoriale.o ../format.cc -o riproviamo.x
-forzato: forzato.o
-	g++ forzato.o differenzia.o vettoriale.o ../format.cc -o forzato.x
+riproviamo: riproviamo.o differenzia.o vettoriale.o
+	g++ riproviamo.o differenzia.o vettoriale.o ${LIBS} ${INCS} ../format.cc -o riproviamo.x
+forzato: forzato.o differenzia.o vettoriale.o
+	g++ forzato.o differenzia.o vettoriale.o ${LIBS} ${INCS} ../format.cc -o forzato.x
 graphforzato: graphforzato.o
 	g++ graphforzato.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o graphforzato.x
-pendolo: pendolo.o
+pendolo: pendolo.o differenzia.o vettoriale.o
 	g++ pendolo.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o pendolo.x
-graphkutta: graphkutta.o
+graphkutta: graphkutta.o differenzia.o vettoriale.o
 	g++ graphkutta.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o graphkutta.x 
-error: error.o
+error: error.o differenzia.o vettoriale.o
 	g++ error.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o error.x 
-graph: graph.o
+graph: graph.o differenzia.o vettoriale.o
 	g++ graph.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o graph.x 
 riproviamo.o: differenzia.o vettoriale.o
-	g++ -c riproviamo.cpp -o riproviamo.o
+	g++ -c riproviamo.cpp ${LIBS} ${INCS} -o riproviamo.o
 forzato.o: differenzia.o vettoriale.o
-	g++ -c forzato.cpp -o forzato.o
+	g++ -c forzato.cpp ${LIBS} ${INCS} -o forzato.o
 graphforzato.o: differenzia.o vettoriale.o
 	g++ -c graphforzato.cpp ${LIBS} ${INCS} -o graphforzato.o
 pendolo.o: differenzia.o vettoriale.o
