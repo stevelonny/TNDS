@@ -14,6 +14,8 @@
 
 #include "random.hpp"
 
+using namespace std;
+
 class EsperimentoPrisma{
 
     public:
@@ -64,5 +66,8 @@ class EsperimentoPrisma{
         double m_n1_mis, m_n2_mis;
         double m_dm1_mis, m_dm2_mis;
         double m_th0_mis, m_th1_mis, m_th2_mis;
+
+        TH1F DoHisto(const char* name, vector<double> &values, int n_volte);
+        TH2F DoBhisto(const char* name, vector<double> &xvalues, vector<double> &yvalues, int n_volte);
 
 };

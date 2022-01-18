@@ -15,13 +15,13 @@ EsperimentoPrisma::EsperimentoPrisma() :
 {
     m_n1 = sqrt(m_A + (m_B / (m_lambda1*m_lambda1)));
     m_n2 = sqrt(m_A + (m_B / (m_lambda2*m_lambda2)));
-    std::cout << m_n1 << " " << m_n2 << std::endl;
+    fmt::print("Indici di partenza: n1 = {0:2.2f} , n2 = {1:2.2f}\n", m_n1, m_n2);
     m_dm1 = 2.*asinf32x(m_n1*sin(m_alpha/2.))-m_alpha;
     m_dm2 = 2.*asinf32x(m_n2*sin(m_alpha/2.))-m_alpha;
-    std::cout << m_dm1 << " " << m_dm2 << std::endl;
+    fmt::print("Delta di partenza: delta_1 = {0:2.2f} , delta_2 = {1:2.2f}\n", m_dm1, m_dm2);
     m_th1 = m_th0 + m_dm1;
     m_th2 = m_th0 + m_dm2;
-    cout << m_th1 << " " << m_th2 << endl;
+    fmt::print("Theta di partenza: theta_1 = {0:2.2f} , theta_2 = {0:2.2f}\n", m_th1, m_th2);
 }
 
 EsperimentoPrisma::~EsperimentoPrisma() {}
@@ -65,32 +65,18 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     }
     std::cout << std::endl;
 
-    TH1F histo_th0("Theta_0", "Theta_0", 100, *min_element(th0.begin(), th0.end()), *max_element(th0.begin(), th0.end()));
-    TH1F histo_th1("Theta_1", "Theta_1", 100, *min_element(th1.begin(), th1.end()), *max_element(th1.begin(), th1.end()));
-    TH1F histo_th2("Theta_2", "Theta_2", 100, *min_element(th2.begin(), th2.end()), *max_element(th2.begin(), th2.end()));
-    TH1F histo_delta1("Delta_1", "Delta_1", 100, *min_element(delta1.begin(), delta1.end()), *max_element(delta1.begin(), delta1.end()));
-    TH1F histo_delta2("Delta_2", "Delta_2", 100, *min_element(delta2.begin(), delta2.end()), *max_element(delta2.begin(), delta2.end()));
-    TH2F bhisto_delta("Delta", "Delta", 100, *min_element(delta1.begin(), delta1.end()), *max_element(delta1.begin(), delta1.end()), 100, *min_element(delta2.begin(), delta2.end()), *max_element(delta2.begin(), delta2.end()));
-    TH1F histo_n1("n1", "n1", 100, *min_element(n1.begin(), n1.end()), *max_element(n1.begin(), n1.end()));
-    TH1F histo_n2("n2", "n2", 100, *min_element(n2.begin(), n2.end()), *max_element(n2.begin(), n2.end()));
-    TH2F bhisto_n("n", "n", 100, *min_element(n1.begin(), n1.end()), *max_element(n1.begin(), n1.end()), 100, *min_element(n2.begin(), n2.end()), *max_element(n2.begin(), n2.end()));
-    TH1F histo_A("A", "A", 100, *min_element(A.begin(), A.end()), *max_element(A.begin(), A.end()));
-    TH1F histo_B("B", "B", 100, *min_element(B.begin(), B.end()), *max_element(B.begin(), B.end()));
-    TH2F bhisto_AB("AB", "AB", 100, *min_element(A.begin(), A.end()), *max_element(A.begin(), A.end()), 100, *min_element(B.begin(), B.end()), *max_element(B.begin(), B.end()));
-    for(int i{0}; i<n_volte; i++){
-        histo_th0.Fill(th0[i]);
-        histo_th1.Fill(th1[i]);
-        histo_th2.Fill(th2[i]);
-        histo_delta1.Fill(delta1[i]);
-        histo_delta2.Fill(delta2[i]);
-        bhisto_delta.Fill(delta1[i], delta2[i]);
-        histo_n1.Fill(n1[i]);
-        histo_n2.Fill(n2[i]);
-        bhisto_n.Fill(n1[i], n2[i]);
-        histo_A.Fill(A[i]);
-        histo_B.Fill(B[i]);
-        bhisto_AB.Fill(A[i], B[i]);
-    }
+    TH1F histo_th0      = DoHisto("Theta 0", th0, n_volte);
+    TH1F histo_th1      = DoHisto("Theta_1", th1, n_volte);
+    TH1F histo_th2      = DoHisto("Theta_2", th2, n_volte);
+    TH1F histo_delta1   = DoHisto("Delta_1", delta1, n_volte);
+    TH1F histo_delta2   = DoHisto("Delta_2", delta2, n_volte);
+    TH2F bhisto_delta   = DoBhisto("Delta", delta1, delta2, n_volte);
+    TH1F histo_n1       = DoHisto("n1", n1, n_volte);
+    TH1F histo_n2       = DoHisto("n2", n2, n_volte);
+    TH2F bhisto_n       = DoBhisto("indici", n1, n2, n_volte); 
+    TH1F histo_A        = DoHisto("A", A, n_volte);
+    TH1F histo_B        = DoHisto("B", B, n_volte);
+    TH2F bhisto_AB      = DoBhisto("AB", A, B, n_volte);
     histo_th0.StatOverflows(kTRUE);
     histo_th1.StatOverflows(kTRUE);
     histo_th2.StatOverflows(kTRUE);
@@ -103,6 +89,7 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     histo_A.StatOverflows(kTRUE);
     histo_B.StatOverflows(kTRUE);
     bhisto_AB.StatOverflows(kTRUE);
+    fmt::print("Stampiamo su file *.png i grafici...\n");
     can.Divide(3,1);
     can.cd(1);
     histo_th0.Draw();
@@ -142,4 +129,20 @@ void EsperimentoPrisma::Analizza(unsigned int n_volte=10000){
     fmt::print("Correlazione AB:        {0:2.0f}%\n", bhisto_AB.GetCorrelationFactor()*100);
 
     fmt::print("Terminato!\n");
+}
+
+TH1F EsperimentoPrisma::DoHisto(const char* name, vector<double> &values, int n_volte){
+    TH1F histo(name, name, 100, *min_element(values.begin(), values.end()), *max_element(values.begin(), values.end()));
+    for(int i{0}; i<n_volte; i++){
+        histo.Fill(values[i]);
+    }
+    return histo;
+}
+
+TH2F EsperimentoPrisma::DoBhisto(const char* name, vector<double> &xvalues, vector<double> &yvalues, int n_volte){
+    TH2F bhisto(name, name, 100, *min_element(xvalues.begin(), xvalues.end()), *max_element(yvalues.begin(), yvalues.end()), 100, *min_element(yvalues.begin(), yvalues.end()), *max_element(yvalues.begin(), yvalues.end()));
+    for(int i{0}; i<n_volte; i++){
+        bhisto.Fill(xvalues[i], yvalues[i]);
+    }
+    return bhisto;
 }
