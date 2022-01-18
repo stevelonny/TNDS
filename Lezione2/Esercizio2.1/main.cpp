@@ -1,20 +1,43 @@
-#include "vettore.h"
 #include "stats.h"
 
-int main(int argc, const char *argv[]){
+int main(int argc, const char *argv[]) {
+
+    if (argc<3){
+        cout << "Uso del programma: " << argv[0] << " ndata filename" << endl;
+        return -1;
+    }
+    
     int ndata = atoi(argv[1]);
+    
+    const char* filename = argv[2];
 
-    const char * filename = argv[2];
+    Vettore data = Read(filename, ndata);
 
-    cout << ndata <<  endl;
+    cout << endl << data[0] << " " << data[1] << endl;
+    cout << endl << data.GetComponent(0) << " " << data.GetComponent(1) << endl << endl;
 
-    Vettore data = Leggi(filename, ndata);
-    cout << endl;
-    cout << data.GetN() << endl;
-    cout << endl;
+    Print(data, 10);
+    cout << endl << data.GetN() << endl;
 
-    Stampa(data, 10);
+    cout << "Media: " << Mean(data) << endl;
+    cout << "Deviazione standard: " << StdDev(data) << endl;
+    cout << "Varianza: " << Variance(data) << endl << endl;
 
-    return 1;
+    Print(data, 10);
+    cout << endl << data.GetN() << endl;
 
+    cout << "Mediana: " << Median(data) << endl << endl;
+
+    Print(data, 10);
+    cout << endl << data.GetN() << endl;
+    cout << "proviamo a riordinare agendo per operator" << endl;
+
+    Sort(data);
+
+    Print(data, 10);
+    cout << endl << data.GetN() << endl;
+
+    Print(data, data.GetN(), "out.txt");
+
+    return 0;
 }
