@@ -29,7 +29,7 @@ int main(int argc, char** argv){
 
     Sort(data);
 
-    Write("out.txt", data, ndata);
+    Print(data, ndata, "out.txt");
 
     return 0;
 }

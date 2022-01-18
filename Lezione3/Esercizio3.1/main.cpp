@@ -26,7 +26,7 @@ int main(int argc, char** argv){
     cout << "Varianza: " << Variance<double>(data) << endl << endl;
     cout << "Mediana: " << Median<double>(data) << endl << endl;
 
-    Write("out.txt", data, ndata);
+    Print(data, ndata, "out.txt");
 
     return 0;
 }

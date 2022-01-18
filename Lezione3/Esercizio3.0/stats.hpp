@@ -132,7 +132,7 @@ template <typename T> double Median(const Vettore<T> &data){
     }
 }
 
-template <typename T> void Write(const char * filename, Vettore<T> &data, int dim){
+template <typename T> void Print(Vettore<T> &data, int dim, const char * filename){
     cerr << "(1/4) Apertura file " << filename << endl;
     ofstream file_out;
     cerr << "(2/4) Scrittura su file" << endl;
