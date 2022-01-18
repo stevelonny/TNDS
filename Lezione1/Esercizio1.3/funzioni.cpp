@@ -38,6 +38,7 @@ double * leggi(const char* filename, int ndata){
 
     if(file_in.fail()){
         cout << "Impossibile aprire il file" << endl;
+        exit(-2);
     }
 
     for(int i=0; i<ndata; i++){
@@ -48,7 +49,7 @@ double * leggi(const char* filename, int ndata){
     return data;
 }
 
-void stampa(const char * filename, double data[], int dim){
+/* void stampa(const char * filename, double data[], int dim){
     cout << "Dati letti da " << filename << ": " << endl;
 
     for(int i=0; i<dim; i++){
@@ -56,7 +57,7 @@ void stampa(const char * filename, double data[], int dim){
     }
     cout << endl;
 }
-
+ */
 void stampa(double data[], int dim){
     for(int i=0; i<dim; i++){
         cout << data[i] << endl;
@@ -103,7 +104,7 @@ double mediana(double data[], int dim){
     }
 }
 
-void scrivi(const char * filename, double data[], int dim){
+void stampa(const char * filename, double data[], int dim){
     ofstream file_out;
     
     file_out.open(filename);

@@ -15,7 +15,7 @@ int main(int argc, const char *argv[]) {
 	// 1. Legge i dati dal file
 
     double* data = leggi(filename, ndata);
-    stampa(filename, data, ndata);
+    stampa(data, ndata);
 
     // 2. Calcola la media e la varianza
     
@@ -35,7 +35,7 @@ int main(int argc, const char *argv[]) {
     stampa(ord, ndata);
 
     // 5. Scrive l'array ordinato in un file
-    scrivi("output.txt", ord, ndata);
+    stampa("output.txt", ord, ndata);
 
 }
 

@@ -13,4 +13,4 @@ void stampa(double data[], int dim);
 double * copia(double data[], int dim);
 void ordina(double vett[],int dim);
 double mediana(double data[], int dim);
-void scrivi(const char * filename, double data[], int dim);
+//void scrivi(const char * filename, double data[], int dim);
