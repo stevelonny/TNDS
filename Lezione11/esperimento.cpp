@@ -140,7 +140,7 @@ TH1F EsperimentoPrisma::DoHisto(const char* name, vector<double> &values, int n_
 }
 
 TH2F EsperimentoPrisma::DoBhisto(const char* name, vector<double> &xvalues, vector<double> &yvalues, int n_volte){
-    TH2F bhisto(name, name, 100, *min_element(xvalues.begin(), xvalues.end()), *max_element(yvalues.begin(), yvalues.end()), 100, *min_element(yvalues.begin(), yvalues.end()), *max_element(yvalues.begin(), yvalues.end()));
+    TH2F bhisto(name, name, 100, *min_element(xvalues.begin(), xvalues.end()), *max_element(xvalues.begin(), xvalues.end()), 100, *min_element(yvalues.begin(), yvalues.end()), *max_element(yvalues.begin(), yvalues.end()));
     for(int i{0}; i<n_volte; i++){
         bhisto.Fill(xvalues[i], yvalues[i]);
     }

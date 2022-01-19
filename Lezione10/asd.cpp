@@ -13,12 +13,12 @@ int main(){
     cout << sizeof(unsigned int) << endl;
     RandomGen sium(1);
 
-    int nmax = 1;
-    TH1F unif("Uniforme", "Uniforme", 100, 0, 10);
+    int nmax = 10000;
+    TH1F unif("Uniforme", "Uniforme", 100, -10, 10);
     //TH1F asd("Uniforme", "Uniforme", 100, 0, 10);
     for(int k{0}; k<nmax; k++){
         //asd.Fill(sium.Gauss(5,1));
-        unif.Fill(sium.GaussAR(5,1));
+        unif.Fill(sium.GaussAR(1,1));
     }
 
     TCanvas can2("Uniforme", "Uniforme");
