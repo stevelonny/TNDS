@@ -50,7 +50,8 @@ int main(int argc, const char** argv){
     TMultiGraph sium("Errori", "Errori");
     midgraph->SetTitle("Midpoint");
     midgraph->SetMarkerColor(2);
-    simgraph->SetTitle("Simpson");
+    //simgraph->SetTitle("Simpson");
+    simgraph->SetNameTitle("Errori", "Simpson");
     simgraph->SetMarkerColor(4);
     //sium.Add(midgraph);
     //sium.Add(simgraph);
@@ -63,14 +64,15 @@ int main(int argc, const char** argv){
     simgraph->SetMinimum(min*1e-1);
     simgraph->SetMaximum(max*10);
     simgraph->GetXaxis()->SetLimits(passo-passo/2, maxstep+passo);
+    simgraph->GetXaxis()->SetTitle("Numero di passi");
+    simgraph->GetYaxis()->SetTitle("Errore");
     simgraph->Draw("A*");
     can.cd();
     midgraph->Draw("*");
     can.Modified();
-    midgraph->GetXaxis()->SetTitle("Numero di passi");
-    midgraph->GetYaxis()->SetTitle("Errore");
     can.BuildLegend();
     can.SetTitle("Andamento Passi-Errore");
+    can.Modified();
     can.Print("errori.png");
     return 0;
 }
