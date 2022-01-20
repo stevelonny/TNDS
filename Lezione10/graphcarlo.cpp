@@ -118,8 +118,8 @@ int main(int argc, const char** argv){
 
     TCanvas can_error("error", "error", 1280, 780);
     TGraph  gmedia, ghit;
-    TF1 * media_fit = new TF1("fit_media", "[0]/sqrt(x)", 90, 10010);
-    TF1 * hit_fit = new TF1("fit_hit", "[0]/sqrt(x)", 90, 10010);
+    TF1 * media_fit = new TF1("fit_media", "[0]/sqrt(x)", (double)sample_size.front()-10., (double)sample_size.back()+10.);
+    TF1 * hit_fit = new TF1("fit_hit", "[0]/sqrt(x)", (double)sample_size.front()-10., (double)sample_size.back()+10.);
 
     for(int i{0}; i<sample_size.size(); i++){
         gmedia.SetPoint(i, sample_size[i], media[i]);
