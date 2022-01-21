@@ -76,7 +76,7 @@ int main(){
     mgraph->Draw("ALP*");
     can->Modified();
     can->BuildLegend();
-
+    
     //can->Print("errori.png");
     app.Run();
     return 0;

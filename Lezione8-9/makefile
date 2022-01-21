@@ -1,5 +1,7 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
+esercizio9.3 : esercizio9.3.o differenzia.o vettoriale.o
+	g++ esercizio9.3.o differenzia.o vettoriale.o ${LIBS} ${INCS} -o esercizio9.3.x
 esercizio9.2 : esercizio9.2.o differenzia.o vettoriale.o
 	g++ esercizio9.2.o differenzia.o vettoriale.o ${LIBS} ${INCS} ../format.cc -o esercizio9.2.x
 riproviamo: riproviamo.o differenzia.o vettoriale.o
@@ -24,6 +26,8 @@ forzato.o: differenzia.o vettoriale.o forzato.cpp
 	g++ -c forzato.cpp ${LIBS} ${INCS} -o forzato.o
 graphforzato.o: differenzia.o vettoriale.o graphforzato.cpp
 	g++ -c graphforzato.cpp ${LIBS} ${INCS} -o graphforzato.o
+esercizio9.3.o: differenzia.o vettoriale.o esercizio9.3.cpp
+	g++ -c esercizio9.3.cpp ${LIBS} ${INCS} -o esercizio9.3.o
 pendolo.o: differenzia.o vettoriale.o pendolo.cpp
 	g++ -c pendolo.cpp ${LIBS} ${INCS} -o pendolo.o
 error.o: differenzia.o vettoriale.o error.cpp

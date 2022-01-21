@@ -1,6 +1,8 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
-esercizio10.0 : esercizio10.0.o random.o funzioni.o montecarlo.o
+esercizio10.2: carlosampling graphcarlo
+	echo "./carlosampling genera i file .dat, mentre graphcarlo li analizza"
+esercizio10.0: esercizio10.0.o random.o funzioni.o montecarlo.o
 	g++ esercizio10.0.o ${LIBS} ${INCS} random.o funzioni.o montecarlo.o -o esercizio10.0.x
 grapherror: grapherror.o random.o funzioni.o montecarlo.o
 	g++ grapherror.o ${LIBS} ${INCS} random.o funzioni.o montecarlo.o ../format.cc -o grapherror.x
