@@ -78,7 +78,7 @@ int main(){
         t += h;
         g_eul_meno.SetPoint(i, pos_0[0], pos_0[1]);
     }
-    TCanvas can("sium", "sium", 800, 600);
+    TCanvas can("sium", "sium", 800, 800);
     can.cd();
     g_eul_meno.Draw("AL");
     can.Print("meno_uno_eulero.png");
@@ -99,7 +99,7 @@ int main(){
     TGraph g_kut_plus;
     point.setAlpha(1.);
     t = 0;
-    pos_0 = {1, 0, 0, -1};
+    pos_0 = {1.1, 0, 0, -1};
     for(int i{0}; i<n_step; i++){
         pos_0 = kut.Passo(t, pos_0, realh, point);
         t += h;
@@ -112,7 +112,7 @@ int main(){
     TGraph g_kut_meno;
     point.setAlpha(-1.);
     t = 0;
-    pos_0 = {1, 0, 0, -1};
+    pos_0 = {1.1, 0, 0, -1};
     for(int i{0}; i<n_step; i++){
         pos_0 = kut.Passo(t, pos_0, realh, point);
         t += h;
