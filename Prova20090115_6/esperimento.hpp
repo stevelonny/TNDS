@@ -37,7 +37,7 @@ class Glicerina {
         void Analizza(int n_volte, double R, double inc_t=0.01, double inc_R = 0.0001, double inc_x = 0.001) {
             vector<double> v_nu;
             string title = fmt::format("nu, R={0}, inc_r={1}, inc_t={2}, inc_x={3}", R, inc_R, inc_t, inc_x);
-            FILE *file_out = fopen("soluzione.txt", "a");
+            FILE *file_out = fopen("soluzione.txt", "a+");
             for(int i{0}; i<n_volte; i++){
                 Esegui(R, inc_t, inc_R, inc_x);
                 v_nu.push_back(m_nu_mis);
