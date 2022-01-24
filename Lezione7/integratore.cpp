@@ -32,7 +32,7 @@ void Integrale::checkInterval(double a, double b){
     m_a = min(a, b);
     m_b = max(a, b);
     m_sign = (a < b) ? 1 :-1;
-    m_h = (b-a)/m_nstep;
+    m_h = (m_b-m_a)/m_nstep;
 }
 
 /* Classe midpoint */
@@ -56,7 +56,7 @@ void Simpson::checkInterval(double a, double b){
     m_a = min(a, b);
     m_b = max(a, b);
     m_sign = (a < b) ? 1 :-1;
-    m_h = (b-a)/r_nstep; //anche qua
+    m_h = (m_b-m_a)/r_nstep; //anche qua
 }
 
 double Simpson::Calculate(FunzioneBase &f){
