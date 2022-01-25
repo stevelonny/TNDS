@@ -145,31 +145,31 @@ int main(){
 
 	// punto 6 :
 
-        int n_passi{(int)(fabs(x_3-x_1)/0.1+0.5)};
-        TCanvas can("sium", "sium", 800, 600);
-        TGraph g_passi;
-        double h{0.1};
-        double t{x_1};
-        fmt::print("Punto 6, tabella dati\n");
-        fmt::print(" x_1+t | F()\n");
-        for(int i{0}; i<n_passi; i++){
-            t += h;
-            temp = trap.IntegrateSteps(x_1, t, 10, f_funzione);
-            fmt::print(" {0:>3.2f} | {1:>5.3f} \n", t, temp);
-            g_passi.SetPoint(i, t, temp);
-        }
+    int n_passi{(int)(fabs(x_3-x_1)/0.1+0.5)};
+    TCanvas can("sium", "sium", 800, 600);
+    TGraph g_passi;
+    double h{0.1};
+    double t{x_1};
+    fmt::print("Punto 6, tabella dati\n");
+    fmt::print(" x_1+t | F()\n");
+    for(int i{0}; i<n_passi; i++){
+        t += h;
+        temp = trap.IntegrateSteps(x_1, t, 10, f_funzione);
+        fmt::print(" {0:>3.2f} | {1:>5.3f} \n", t, temp);
+        g_passi.SetPoint(i, t, temp);
+    }
 
-        can.cd();
-        g_passi.SetTitle("Punto 6");
-        g_passi.GetXaxis()->SetTitle("t");
-        g_passi.GetYaxis()->SetTitle("y");
-        g_passi.Draw("AL*");
-        can.Print("punto6.png");
+    can.cd();
+    g_passi.SetTitle("Punto 6");
+    g_passi.GetXaxis()->SetTitle("t");
+    g_passi.GetYaxis()->SetTitle("y");
+    g_passi.Draw("AL*");
+    can.Print("punto6.png");
 
-        FunzioneIntegrale funny(x_1);
-        Bisezione bis_bis;
-        double t_0{bis_bis.CercaZeriReference(4, 5, funny, 0.01, 1024)};
-        fmt::print("Punto 7 : Zero della funzione integrale t0 = {0}\n", t_0);
+    FunzioneIntegrale funny(x_1);
+    Bisezione bis_bis;
+    double t_0{bis_bis.CercaZeriReference(4, 5, funny, 0.01, 1024)};
+    fmt::print("Punto 7 : Zero della funzione integrale t0 = {0}\n", t_0);
 
 
 
