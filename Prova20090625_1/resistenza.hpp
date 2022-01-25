@@ -28,7 +28,7 @@ class PonteAFilo {
 
         double Analizza(double R, int n_volte = 1000){
             string title{fmt::format("ponte_R{0:>3.0f}", R)};
-            FILE * file_out = fopen(FILENAME, "a");
+            FILE * file_out = fopen(FILENAME, "a+");
             vector<double> resistances;
             for(int i{0}; i<n_volte; i++){
                 Esegui(R);
