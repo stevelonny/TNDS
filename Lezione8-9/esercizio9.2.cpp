@@ -15,7 +15,7 @@ using namespace std;
 
 int main(){
 
-    TApplication app("app", 0, 0);
+    //TApplication app("app", 0, 0);
 
     Kutta kut;
     Eulero eul;
@@ -32,8 +32,9 @@ int main(){
     int c{0};
     fmt::print(" {0:5} | {1:>10} | {2:>10} | \n", "Passo", "Err Eulero", "Err Kutta");
     for(double h=0.001; h<hmax; h*=2.){
-        vector<double> xk{0., 1.};
-        vector<double> xe{0., 1.};
+        //reimposto param iniziali per ogni ciclo
+        vector<double> xk{0., 1.};      //vettore per kutta
+        vector<double> xe{0., 1.};      //vettore per eulero
         double t{0.};
         //cout << h;
         int nstep{int(tmax/h+0.5)};
@@ -68,7 +69,7 @@ int main(){
     mgraph->SetTitle("Errori");
     mgraph->GetXaxis()->SetTitle("Numero di passi");
     mgraph->GetYaxis()->SetTitle("Errore");
-    mgraph->Draw("A*");
+    //mgraph->Draw("A*");
     //geulero->Draw("A*");
     //gkutta->Draw("*");
     can->SetLogx();
@@ -76,8 +77,8 @@ int main(){
     mgraph->Draw("ALP*");
     can->Modified();
     can->BuildLegend();
-    
+    can->Print("92.png");
     //can->Print("errori.png");
-    app.Run();
+    //app.Run();
     return 0;
 }

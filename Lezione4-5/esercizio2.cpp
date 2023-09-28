@@ -9,17 +9,17 @@ int main(int argc, char** argv){
     double m = atof(argv[1]);
     double c = atof(argv[2]);
 
-    Particella *a = new Particella(m, c);
-    Elettrone *e = new Elettrone();
+    Particella a(m, c);
+    Elettrone e;
     
-    a->Print();
-    e->Print();
+    a.Print();
+    e.Print();
     
     cout << "Proviamo a fare una particella b uguale ad a" << endl;
-    Particella b(*a);
+    Particella b(a);
     b.Print();
     cout << "Proviamo a fare una particella b uguale all'elettrone e" << endl;
-    Particella d(*e);
+    Particella d(e);
     d.Print();
 
     return 0;

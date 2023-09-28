@@ -134,8 +134,12 @@ int main(){
         //values.resize(sample_size[(i+1)<sample_size.size()?(i+1):i]);
         cout << endl;
     }
-
-        gmedia.Fit(media_fit, "", "", 90, 10010);
+        TCanvas can("sium", "sium", 800, 600);
+        can.cd();
+        gmedia.Draw("A*");
+        can.Print("gmedia.png");
+        can.Clear();
+        gmedia.Fit(media_fit, "", "", (double)sample_size.front()-10., (double)sample_size.back()+10.);
         double k_media{media_fit->GetParameter(0)};
 
         fmt::print("\nPunto 5 : Parametro k andamento erroe-N secondo la relazione errore=k/sqrt(N): {0:2.2f} \n", k_media);
@@ -146,7 +150,6 @@ int main(){
 	// punto 6 :
 
     int n_passi{(int)(fabs(x_3-x_1)/0.1+0.5)};
-    TCanvas can("sium", "sium", 800, 600);
     TGraph g_passi;
     double h{0.1};
     double t{x_1};

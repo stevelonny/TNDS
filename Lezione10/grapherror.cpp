@@ -53,7 +53,7 @@ int main(int argc, const char** argv){
     gerror.GetXaxis()->SetTitle("N");
     gerror.GetYaxis()->SetTitle("Errore");
     //funfit->Draw("C");
-    gerror.Draw("A*");
+    gerror.Draw("*");
     can.BuildLegend();
     can.Print("errors.png");
 
