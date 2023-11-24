@@ -1,34 +1,42 @@
 # Laboratorio di TNDS di steve
+Raccolta di codici scritti durante il corso di Laboratorio di Trattamento Numerico dei Dati Sperimentali (A.A. 2021-2022) di Fisica @UNIMI. 
 
 ## Lezione 1
-statistica and co
+Lettura da file e uso di array dinamici.
+Implentazioni basiche di funzioni di manipolazione dati e statistica.
+Funzioni in librerie.
 
 ## Lezione 2
-classe vettore
-riadattare la libreria di statistica per la classe vettore
+Sviluppo di un classe vettore per l'allocazione di memoria dinamica.
+Riadattate le funzioni nella libreria dell'esercizio precedente.
+Uso di librerie multiple.
 
 ## Lezione 3
-Template e libreria vector
-Uso anche di TH1F e di root
+Implentazione dei template type nella libreria di vettori dell'esercizio precedente. Introduzione alla libreria STL ```<vector>```.
+Uso anche di TH1F e di root.
 
 ## Lezione 4-5
-Tante classi per arrivare al dipolo. Uso di root per il grafico del dipolo mannaggia
+Uso delle classi per il calcolo del campo vettoriale.
+Uso di root per il grafico del dipolo.
 
 ## Lezione 6 & Lezione 6.1
 Ricerca degli zeri con il metodo della bisezione e della secante.
 La corretta implementazione della secante è contenuta in [`/Lezione6.1`](/Lezione6.1/)
 
 ## Lezione 7
-Integrazione
+Integrazione numerica.
 
 ## Lezione 8-9
-Equazioni differenziali, metodo di Eulero e Runge-Kutta, oscillatore armonico semplice (pure disegnato con ricerca della frequenza di risonanza contenuta in [`riproviamo.cpp`](/Lezione8-9/riproviamo.cpp)), pendolo (graficato con ricerca del periodo)
+Equazioni differenziali con metodi di Eulero e Runge-Kutta.
+Oscillatore armonico semplice (pure disegnato con ricerca della frequenza di risonanza contenuta in [`riproviamo.cpp`](/Lezione8-9/riproviamo.cpp)).
+Pendolo (graficato con ricerca del periodo).
 
 ## Lezione 10
-Random generator e metodi montecarlo. L'esercizio 10.2 è diviso in due file: [`carlosampling.cpp`](/Lezione10/carlosampling.cpp) e [`graphcarlo.cpp`](/Lezione10/graphcarlo.cpp)
+Random generator e metodi montecarlo.
+L'esercizio 10.2 è diviso in due file: [`carlosampling.cpp`](/Lezione10/carlosampling.cpp) e [`graphcarlo.cpp`](/Lezione10/graphcarlo.cpp).
 
 ## Lezione 11
-Esperimento
+Esperimento del prisma simulato con metodi montecarlo.
 
 ---
 
