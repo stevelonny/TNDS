@@ -1,5 +1,5 @@
 compito: main.o integratore.o funzioni.o montecarlo.o random.o
-	g++ main.o integratore.o funzioni.o montecarlo.o random.o ../format.cc -o main.x
+	g++ main.o integratore.o funzioni.o montecarlo.o random.o -o main.x
 main.o: funzioni.hpp integratore.hpp montecarlo.hpp main.cpp
 	g++ -c main.cpp -o main.o
 integratore.o : funzioni.hpp integratore.hpp integratore.cpp

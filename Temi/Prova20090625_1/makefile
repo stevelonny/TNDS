@@ -1,7 +1,7 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
 compito: compito.o random.o resistenza.hpp
-	g++ compito.o random.o ../format.cc ${LIBS} ${INCS} -o compito.x
+	g++ compito.o random.o ${LIBS} ${INCS} -o compito.x
 compito.o : compito.cpp resistenza.hpp
 	g++ -c compito.cpp ${LIBS} ${INCS} -o compito.o
 random.o: random.cpp

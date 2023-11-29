@@ -1,5 +1,5 @@
 compito: compito.o differenzia.o vettoriale.o
-	g++ compito.o differenzia.o vettoriale.o ../format.cc -o compito.x
+	g++ compito.o differenzia.o vettoriale.o -o compito.x
 compito.o: compito.cpp differenzia.hpp vettoriale.hpp
 	g++ -c compito.cpp -o compito.o
 differenzia.o: differenzia.cpp differenzia.hpp vettoriale.hpp

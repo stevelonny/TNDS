@@ -7,7 +7,7 @@
 #include "TLegend.h"
 #include "TImage.h"
 #include "random.hpp"
-#include "../fmtlib.h"
+#include "../../fmtlib.h"
 
 #define FILENAME "soluzione.txt"
 

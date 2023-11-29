@@ -1,8 +1,8 @@
 LIBS:=`root-config --libs`
 INCS:=`root-config --cflags`
-compito : compito.o solutore.o funzioni.o integratore.o montecarlo.o random.o format.cc fmtlib.h
-	g++ compito.o solutore.o funzioni.o integratore.o montecarlo.o random.o format.cc ${LIBS} ${INCS} -o compito.x
-compito.o :	funzioni.hpp solutore.hpp compito.cpp fmtlib.h
+compito : compito.o solutore.o funzioni.o integratore.o montecarlo.o random.o
+	g++ compito.o solutore.o funzioni.o integratore.o montecarlo.o random.o  ${LIBS} ${INCS} -o compito.x
+compito.o :	funzioni.hpp solutore.hpp compito.cpp
 	g++ -c compito.cpp ${LIBS} ${INCS} -o compito.o
 integratore.o : funzioni.hpp integratore.hpp integratore.cpp
 	g++ -c integratore.cpp -o integratore.o

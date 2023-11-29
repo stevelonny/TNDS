@@ -1,45 +1,45 @@
 # Laboratorio di TNDS di steve
 Raccolta di codici scritti durante il corso di [Laboratorio di Trattamento Numerico dei Dati Sperimentali](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/) (A.A. 2021-2022) di Fisica @UNIMI. Il turno di laboratorio è quello tenuto dal [prof. Tomasi](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 #### Dipendenze
-Nelle ultime lezioni e nei temi svolti è stato fatto uso della libreria ```fmtlib```, che è quindi inclusa in questa repo per comodità spesso anche nelle sottocartelle. Molti codici usano ```root``` per disegnare i grafici.
+Nelle ultime lezioni e nei temi svolti è stato fatto uso della libreria [```fmtlib```](https://fmt.dev), che è quindi inclusa in questa repo per comodità spesso anche nelle sottocartelle. Molti codici usano [```root```](https://root.cern) per disegnare i grafici.
 
 ## Lezioni
 
-### Lezione 1
+### [Lezione 1](/Lezione01/)
 Lettura da file e uso di array dinamici.
 Implentazioni basiche di funzioni di manipolazione dati e statistica.
 Funzioni in librerie.
 
-### Lezione 2
+### [Lezione 2](/Lezione02/)
 Sviluppo di un classe vettore per l'allocazione di memoria dinamica.
 Riadattate le funzioni nella libreria dell'esercizio precedente.
 Uso di librerie multiple.
 
-### Lezione 3
+### [Lezione 3](/Lezione03/)
 Implentazione dei template type nella libreria di vettori dell'esercizio precedente. Introduzione alla libreria STL ```<vector>```.
 Uso anche di TH1F e di root.
 
-### Lezione 4-5
+### [Lezione 4-5](/Lezione04-5/)
 Uso delle classi per il calcolo del campo vettoriale.
 Uso di root per il grafico del dipolo.
 
-### Lezione 6 & Lezione 6.1
+### [Lezione 6](/Lezione06/) & [Lezione 6.1](/Lezione06.1/)
 Ricerca degli zeri con il metodo della bisezione e della secante.
-La corretta implementazione della secante è contenuta in [`/Lezione6.1`](/Lezione6.1/)
+La corretta implementazione della secante è contenuta in [`/Lezione06.1`](/Lezione06.1/)
 
-### Lezione 7
+### [Lezione 7](/Lezione07/)
 Integrazione numerica.
 
-### Lezione 8-9
+### [Lezione 8-9](/Lezione08-9/)
 Equazioni differenziali con metodi di Eulero e Runge-Kutta.
-Oscillatore armonico semplice (pure disegnato con ricerca della frequenza di risonanza contenuta in [`riproviamo.cpp`](/Lezione8-9/riproviamo.cpp)).
+Oscillatore armonico semplice (pure disegnato con ricerca della frequenza di risonanza contenuta in [`riproviamo.cpp`](/Lezione08-9/riproviamo.cpp)).
 Pendolo (graficato con ricerca del periodo).
 
-### Lezione 10
+### [Lezione 10](/Lezione10/)
 Random generator e metodi montecarlo.
 L'esercizio 10.2 è diviso in due file: [`carlosampling.cpp`](/Lezione10/carlosampling.cpp) e [`graphcarlo.cpp`](/Lezione10/graphcarlo.cpp).
 
-### Lezione 11
+### [Lezione 11](/Lezione10/)
 Esperimento del prisma simulato con metodi montecarlo.
 
 ---
@@ -61,9 +61,13 @@ Data | Argomento | Tema
 [2023 06 28](/Temi/Prova20230628)           | Eq. diff.             | [AppelloTNDS_20230628.pdf](/Temi/Prova20230628/AppelloTNDS_20230628.pdf)
 
 ----
+----
 
 ## ToDo
 Cose da mettere a posto
 
-- [ ] cambiare makefile e mettere solo una fmtlib invece di mille
+- [x] cambiare makefile e mettere solo una fmtlib invece di mille
+- [ ] porre un readme dentro ogni lezione
+- [ ] commentare funzioni/fare libreria
 - [ ] pulire e correggere temi d'esame (con commenti magari)
+- [ ] aggiungere versioni con gnuplot++

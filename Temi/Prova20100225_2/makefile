@@ -1,5 +1,5 @@
 compito: compito.o random.o calorimetro.hpp
-	g++ compito.o random.o ../format.cc -o compito.x
+	g++ compito.o random.o -o compito.x
 compito.o : compito.cpp calorimetro.hpp
 	g++ -c compito.cpp -o compito.o
 random.o: random.cpp
