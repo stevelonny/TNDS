@@ -66,7 +66,7 @@ Data | Argomento | Tema
 ## ToDo
 Cose da mettere a posto
 
-- [x] cambiare makefile e mettere solo una fmtlib invece di mille
+- [x] ~cambiare makefile e mettere solo una fmtlib invece di mille~
 - [ ] porre un readme dentro ogni lezione
 - [ ] commentare funzioni/fare libreria
 - [ ] pulire e correggere temi d'esame (con commenti magari)
