@@ -21,7 +21,7 @@ int main(int argc, const char** argv){
         exit(-1);
     }
     //Apertura file
-    vector<unsigned int> sample_size{100, 500, 1000, 5000, 10000};
+    vector<unsigned int> sample_size{100, 500, 1000, 5000, 10000, 50000, 100000};
     ifstream file_in;
     string title, savename;
     vector<double> sample;
@@ -129,15 +129,17 @@ int main(int argc, const char** argv){
     double k_media, k_hit;
 
     can_error.cd();
+    can_error.SetLogx();
+    can_error.SetLogy();
     gmedia.SetTitle("Media");
     gmedia.GetXaxis()->SetTitle("N");
     gmedia.GetYaxis()->SetTitle("Errore");
     gmedia.SetMarkerColor(3);
     ghit.SetMarkerColor(4);
     ghit.SetTitle("Hit-or-Miss");
-    gmedia.Fit(media_fit, "", "", 90, 10010);
+    gmedia.Fit(media_fit, "", "", sample_size.front()-10, sample_size.back()+10);
     k_media = media_fit->GetParameter(0);
-    ghit.Fit(hit_fit, "", "", 90, 10010);
+    ghit.Fit(hit_fit, "", "", sample_size.front()-10, sample_size.back()+10);
     k_hit = hit_fit->GetParameter(0);
     gmedia.Draw("A*");
     ghit.Draw("*");

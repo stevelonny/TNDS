@@ -7,7 +7,7 @@ using namespace std;
 #include <fstream>
 
 int main(){
-    vector<unsigned int> sample_size{100, 500, 1000, 5000, 10000};
+    vector<unsigned int> sample_size{100, 500, 1000, 5000, 10000, 50000, 100000};
     string basetitle{"sample_"};
     string title;
     ofstream file_out;

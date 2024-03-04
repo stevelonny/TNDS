@@ -8,7 +8,11 @@ esercizio2.1c/
 Esperimento/
 Appro/
 adcazzum/
+adcazzum/*
+adcazzum/**
 lib/
+lib/*
+lib/**
 .vscode/launch.json
 .vscode/tasks.json
 .vscode/settings.json
